@@ -1,0 +1,474 @@
+/* Import Font Family */
+@font-face {
+    font-family: RopaSansItalic;
+    src: url('../Fonts/Ropa_Sans/RopaSans-Italic.ttf');
+}
+
+@font-face {
+    font-family: RopaSansRegular;
+    src: url('./../Fonts/Ropa_Sans/RopaSans-Regular.ttf');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    font-family: RopaSansRegular;
+}
+
+.navbar-brand {
+    font-weight: 600;
+    font-size: 30px;
+}
+:root{
+    --backBg: #00CE9E;
+}
+
+.sub-headingBG{
+    display: block;
+    height: 10px;
+    bottom: 0;
+    background: var(--backBg);
+    border-bottom: 5px var(--backBg);
+    top: 20px;
+}
+
+
+
+/* ======================== Reusable Components ====================*/
+
+#hero-section {
+    margin-top: 45px;
+}
+
+#hero-section .title-box:last-child {
+    margin-left: 25px;
+    margin-top: 45px;
+    float: none;
+    display: inline-block;
+}
+
+#hero-section .title-box {
+    width: 520px;
+    overflow: hidden;
+    padding: 45px 35px;
+    background: #000000;
+    float: left;
+    color: #fff;
+    display: flex;
+}
+
+#hero-section .title-box img {
+    width: 303px;
+    float: left;
+    margin: 0 20px 0 0;
+}
+
+#hero-section .title-box h4 {
+    font-size: 45px;
+}
+
+.btn-direkt {
+    color: #fff;
+    background: #00CE9E;
+    border-radius: 0;
+    margin-right: 20px;
+}
+
+.btn {
+    color: #fff;
+    font-size: 25px;
+}
+
+.btn-download {
+    border: 3px solid #00CE9E;
+    border-radius: 0;
+}
+
+.btn-download:hover {
+    background: #00CE9E;
+    border-radius: 0;
+}
+
+.content-heading {
+    width: 50%;
+    margin-top: 60px;
+}
+
+.content-heading h2 {
+    font-size: 45px;
+    font-weight: 700;
+}
+
+.content-heading h3 {
+    margin: 40px 0;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.content-section {
+    font-size: 18px;
+}
+
+.content-section p {
+    text-align: justify-all;
+    margin: 35px 0;
+}
+
+.signeture {
+    width: 30px;
+    margin: 50px 0;
+}
+
+/* ======================= Florian Section ================= */
+
+.d-heading {
+    font-weight: 700;
+}
+
+.sub-heading {
+    display: block;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+
+#florian-section .col-md-8 p {
+    font-size: 17px;
+    font-width: 700;
+    padding: 30px 0;
+}
+
+.col-md-8-profile {
+    width: 76%;
+    position: relative;
+    padding: 60px 50px 20px !important;
+}
+
+.display-img {
+    z-index: 999;
+    position: absolute;
+    top: 25%;
+    left: 80%;
+    right: 23%;
+    transform: translate(-34%, -59%);
+}
+
+.display-img img {
+    width: 400px;
+    text-shadow: 0 0 5px #000;
+}
+
+.p-text {
+    margin: 20px 0;
+    width: 650px;
+    font-size: 20px;
+}
+
+/* ===================== SERVICES SECTION ==================== */
+
+#service-section {
+    margin-top: 80px;
+}
+
+#service-section .service-item {
+    position: relative;
+    overflow: hidden;
+}
+
+#service-section [class*="col-"] {
+    padding: 10px;
+}
+
+#service-section .service-item img {
+    width: 100%;
+    transition: .3s;
+}
+
+#service-section .service-item:hover img {
+    transform: scale(1.2);
+}
+
+#service-section .service-item .service-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    visibility: hidden;
+    opacity: 0;
+    transition: .3s;
+}
+
+#service-section .service-item:hover .service-overlay {
+    visibility: visible;
+    opacity: 1;
+}
+
+#service-section .service-item .service-overlay .service-caption {
+    position: absolute;
+    color: #000;
+    text-align: left;
+    padding: 40px;
+    top: 20%;
+    width: 100%;
+}
+
+
+
+#service-section .service-item .service-overlay .service-caption h5 {
+    font-size: 40px;
+    margin: 0 0 40px 0;
+    transition: .5s;
+    font-weight: 700;
+}
+
+#service-section .service-item:hover .service-overlay .service-caption h5 {
+    margin: 0 0 0 0;
+}
+
+/*============= Heute-section =============*/
+
+
+/*
+.back-bg{
+    background: #00CE9E;
+    width: 100px;
+    padding: 5px;
+}*/
+
+#heute-section {
+    padding: 100px 0 100px 0;
+}
+
+#heute-section .heute-sidebar h4 {
+    font-size: 35px;
+    font-weight: 900;
+}
+
+#heute-section .heute-sidebar ul {
+    font-size: 18px;
+    padding: 0;
+}
+
+#heute-section .heute-sidebar ul li {
+    padding: 7px 0;
+}
+
+.right-side {
+    padding: 70px;
+    background: whitesmoke;
+}
+
+#heute-section .right-side .col-md-3 {
+    text-align: right;
+}
+
+#heute-section .right-side h3 {
+    font-weight: 700;
+    background: #000;
+    color: #fff;
+    display: inline-block;
+    padding: 5px 8px 0 8px;
+    margin: 0 0 5px 0;
+}
+
+#heute-section .right-side .col-md-3 p {
+    font-weight: 400;
+    background: #000;
+    color: #fff;
+    display: inline-block;
+    padding: 5px 8px 0 8px;
+    text-align: right;
+    text-transform: uppercase;
+}
+
+#heute-section .right-side .col-md-9 {
+    padding: 0 0 0 20px;
+}
+
+#heute-section .right-side .col-md-9 h2 {
+    font-weight: 700;
+}
+
+#heute-section .right-side .col-md-9 h5 {
+    font-weight: 700;
+    text-transform: capitalize;
+    padding: 30px 0 10px 0;
+}
+
+#heute-section .right-side .col-md-9 p {
+    text-transform: capitalize;
+    font-size: 18px;
+    font-weight: normal;
+}
+
+#heute-section .right-side .col-md-9 .col-md-12 a {
+    color: #00CE9E;
+    font-size: 20px;
+    border: 2px solid #00CE9E;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+#heute-section .right-side .mini-banner {
+    position: relative;
+}
+
+#heute-section .right-side .mini-banner img {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    box-shadow: 0 0 20px 5px rgba(136, 136, 136, 0.48);
+    transform: translate(-40%, -60%);
+}
+
+#heute-section .right-side .col-md-9 .col-md-12 a:hover {
+    color: #fff;
+    background: #00CE9E;
+}
+
+
+/*============ Slick Slider ==============*/
+#slick-section {
+    width: 100%;
+    padding: 60px 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    margin: 0 !important;
+}
+
+.slider {
+    display: flex;
+    padding: 20px !important;
+}
+
+#slick-section img {
+    margin: 20px 50px;
+    box-shadow: 0 0 20px 5px rgba(136, 136, 136, 0.26);
+    width: 100%;
+}
+
+/* ============ Susbildung Section ============= */
+#susbildung-section {
+    width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+    display: flex;
+}
+
+#susbildung-section h2 {
+    font-size: 40px;
+    font-weight: 700;
+    width: 400px;
+
+}
+
+#susbildung-section .col-5 {
+    background: whitesmoke;
+    padding: 100px;
+    width: 48.5%;
+    align-items: center;
+    justify-content: right;
+    height: 600px;
+}
+
+.box-2 {
+    margin: 100px 0 20px 58px;
+}
+
+#susbildung-section .row .col-md-7 h5 {
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.text-box {
+    padding: 30px 0;
+}
+
+#susbildung-section .row .col-md-7 p {
+    font-size: 22px;
+}
+
+#susbildung-section h6 {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+
+/* ================= Footer Are ==============*/
+footer {
+    background: #000000;
+    padding: 10px 0;
+    overflow: hidden;
+}
+
+footer ul {
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    color: #fff;
+}
+
+.footer-menu {
+    float: left;
+    overflow: hidden;
+}
+
+.footer-menu-social {
+    float: right;
+}
+
+footer ul li {
+    display: inline-block;
+    padding: 20px 30px;
+    text-align: left;
+}
+
+.footer-item {
+    background: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #000;
+    margin: 20px;
+    font-weight: 700;
+}
+
+
+.topScroll {
+    cursor: pointer;
+    z-index: 99999;
+    background: #F8F8F8;
+    box-shadow: 0 0 15px #00000029;
+    padding: 10px;
+    color: #fff;
+    display: inline-block;
+    font-size: 20px;
+    position: fixed;
+    right: 50px;
+    bottom: 120px;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    text-align: center;
+    line-height: 60px;
+    /*visibility: hidden;
+    opacity: 0;*/
+}
+
+.topScroll a {
+    color: #00CE9E;
+}
+
+
+.visible-topScroll {
+    display: none;
+}

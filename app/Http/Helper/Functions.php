@@ -20,3 +20,8 @@ function RandomStatus()
     $rand = ['active' => 'active', 'inactive' => 'inactive'];
     return array_rand($rand, 1);
 }
+
+function SetMessage(String $type, String $message){
+    session()->flash('type', $type);
+    session()->flash('message', $message);
+}

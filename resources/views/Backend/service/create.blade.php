@@ -16,6 +16,7 @@
     <!-- Main content -->
     <section class="content">
         <div class="col-md-8 col-md-offset-2">
+            @include('Error_message')
             <!-- Default box -->
             <div class="box box-primary col-md-6">
                 <div class="box-header with-border">
@@ -23,38 +24,49 @@
                         <h3 class="box-title">Create Service Form</h3>
                     </div>
                     <div class="col-md-6 text-right">
-                        <a href="" class="btn btn-primary"><i class="fa fa-list"></i> Back</a>
+                        <a href="{{ route('staff.home.service.index') }}" class="btn btn-primary"><i class="fa fa-list"></i> Service Management</a>
                     </div>
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form role="form" method="post" class="col-md-10 col-md-offset-1" action="{{ route('staff.home.service.create') }}">
+                <form role="form" method="post" class="col-md-10 col-md-offset-1" enctype="multipart/form-data" action="{{ route('staff.home.service.create') }}">
                     @csrf
                     <div class="box-body">
                         <div class="form-group">
                             <label for="title">Title</label>
-                            <input type="text" class="form-control" id="title" name="title" placeholder="Enter Title">
+                            <input type="text" class="form-control is-invalid @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title') }}" placeholder="Enter Title">
+                            @error('title') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
                         <div class="form-group">
                             <label for="sub_title">Sub Title</label>
-                            <input type="text" class="form-control" id="title" name="sub_title" placeholder="Title">
+                            <input type="text" class="form-control @error('sub_title') is-invalid @enderror" id="sub_title" value="{{ old('sub_title') }}" name="sub_title" placeholder="Title">
+                            @error('sub_title') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
                         <div class="form-group">
-                            <label for="service_icon">Icon</label>
+                            <label for="service_icon">Service Icon</label>
                             <input type="file" id="service_icon" name="service_icon">
+                            @error('service_icon') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
                         <div class="form-group">
-                            <label>
-                                <input type="radio" name="status" value="active" class="flat-red" checked> Active
-                            </label>
-                            <label>
-                                <input type="radio" name="status" value="inactive" class="flat-green"> Inactive
-                            </label>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label for="status" class="control-label">Status</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>
+                                        <input type="radio" name="status" value="active" class="flat-red" checked> Active
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="status" value="inactive" class="flat-green"> Inactive
+                                    </label>
+                                </div>
+                            </div>
+                            @error('status') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Create</button>
                     </div>
                 </form>
             </div>
