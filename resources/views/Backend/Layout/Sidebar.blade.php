@@ -43,6 +43,17 @@
                     <li class="{{ ActiveMenu('staff.home.service.index') }}"><a href="{{ route('staff.home.service.index') }}"><i class="fa fa-circle-o"></i> Services</a></li>
                 </ul>
             </li>
+            <li class="treeview {{ PrefixActive('staff/home/') }}">
+                <a href="javascript:;">
+                    <i class="fa fa-cog"></i> <span>General Setting</span>
+                    <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                </a>
+                <ul class="treeview-menu" style="display: none;">
+                    <li><a href="{{ route('staff.general.index') }}"><i class="fa fa-circle-o"></i> General</a></li>
+                </ul>
+            </li>
         </ul>
     </section>
     <!-- /.sidebar -->

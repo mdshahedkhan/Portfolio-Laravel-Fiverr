@@ -7,19 +7,21 @@ use App\Models\Service;
 use Illuminate\Http\Request;
 use Image;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
 
 class ServiceController extends Controller
 {
     public function index()
     {
-        return view('Backend.service.index');
+        $services = Service::with('user')->orderBy('id', 'DESC')->get();
+        return view('Backend.service.index', compact('services'));
     }
 
     public function create(Request $request)
     {
         if ($request->isMethod('post')) {
             $request->validate([
-                'title'        => 'required|min:6|max:40',
+                'title'        => 'required|min:6|max:40|unique:services',
                 'sub_title'    => 'required|min:6|max:80',
                 'status'       => 'required',
                 'service_icon' => 'required'
@@ -36,8 +38,8 @@ class ServiceController extends Controller
                             'status'    => $request->status,
                             'image'     => $IconName,
                         ]);
-                        if ($Service){
-                            Image::make($service_icon)->resize('390', '390')->save('Upload/ServiceIcon/'.$IconName);
+                        if ($Service) {
+                            Image::make($service_icon)->resize('390', '390')->save('Upload/ServiceIcon/' . $IconName);
                             SetMessage('success', 'Yah! your service has been successfully created.');
                             return redirect()->back();
                         }
@@ -56,4 +58,41 @@ class ServiceController extends Controller
         }
         return view('Backend.service.create');
     }
+
+
+    public function destroy($id)
+    {
+        $id = base64_decode($id);
+        try {
+
+            $service = Service::where('id', $id)->first();
+            if ($service) {
+                if (file_exists(public_path('Upload/ServiceIcon/' . $service->image))) {
+                    unlink(public_path('Upload/ServiceIcon/' . $service->image));
+                }
+                if ($service->delete()) {
+                    SetMessage('success', 'Yah! your service has been successfully deleted.');
+                    return redirect()->back();
+                }
+            } else {
+                SetMessage('warning', 'Recode Not Found..');
+                return redirect()->back();
+            }
+        } catch (\Exception $exception) {
+            SetMessage('warning', 'Database Error, Please contact your developer.');
+            return redirect()->back();
+        }
+    }
+
+    public function ChangeStatus($id, $status)
+    {
+        if (request()->ajax()) {
+            $service         = Service::where('id', base64_decode($id))->first();
+            $service->status = $status;
+            $service->save();
+            return response()->json(['message' => 'Operation Successfully dane.', 'status' => '200', 'statusCode' => Response::HTTP_OK]);
+
+        }
+    }
+
 }

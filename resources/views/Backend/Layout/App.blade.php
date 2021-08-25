@@ -2,10 +2,12 @@
 <html>
 
 <!-- Mirrored from adminlte.io/themes/AdminLTE/pages/examples/blank.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 22 Apr 2021 10:14:09 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<!-- Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=utf-8"/><!-- /Added by HTTrack -->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title') | Admin</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -17,6 +19,8 @@
     <link rel="stylesheet" href="{{ asset('asset/backend/bower_components/Ionicons/css/ionicons.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('asset/backend/dist/css/AdminLTE.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('Frontend/Pack/toastr.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('Frontend/Pack/sweetalert.css') }}">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="{{ asset('asset/backend/dist/css/skins/_all-skins.min.css') }}">
@@ -143,21 +147,21 @@
                                     </p>
                                 </li>
                                 <!-- Menu Body -->
-                                {{--<li class="user-body">
-                                    <div class="row">
-                                        <div class="col-xs-4 text-center">
-                                            <a href="#">Followers</a>
-                                        </div>
-                                        <div class="col-xs-4 text-center">
-                                            <a href="#">Sales</a>
-                                        </div>
-                                        <div class="col-xs-4 text-center">
-                                            <a href="#">Friends</a>
-                                        </div>
+                            {{--<li class="user-body">
+                                <div class="row">
+                                    <div class="col-xs-4 text-center">
+                                        <a href="#">Followers</a>
                                     </div>
-                                    <!-- /.row -->
-                                </li>--}}
-                                <!-- Menu Footer-->
+                                    <div class="col-xs-4 text-center">
+                                        <a href="#">Sales</a>
+                                    </div>
+                                    <div class="col-xs-4 text-center">
+                                        <a href="#">Friends</a>
+                                    </div>
+                                </div>
+                                <!-- /.row -->
+                            </li>--}}
+                            <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-left">
                                         <a href="#" class="btn btn-default btn-flat">Profile</a>
@@ -177,8 +181,8 @@
         <!-- =============================================== -->
 
         <!-- Left side column. contains the sidebar -->
-        @include('Backend.Layout.Sidebar')
-        <!-- =============================================== -->
+    @include('Backend.Layout.Sidebar')
+    <!-- =============================================== -->
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -211,6 +215,9 @@
     <script src="{{ asset('asset/backend/dist/js/adminlte.min.js') }}"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="{{ asset('asset/backend/dist/js/demo.js') }}"></script>
+    <script src="{{ asset('Frontend/Pack/toastr.min.js') }}"></script>
+    <script src="{{ asset('Frontend/Pack/sweetalert.min.js') }}"></script>
+    <script src="{{ asset('Frontend/Pack/Index.js') }}"></script>
     @yield('JS')
     <script>
         $(document).ready(function () {

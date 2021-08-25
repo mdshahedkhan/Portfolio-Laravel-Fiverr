@@ -95,84 +95,21 @@
     <section id="service-section">
         <div class="container">
             <div class="row">
-                <div class="col-md-4 col-sm-6">
-                    <div class="service-item">
-                        <a href="">
-                            <img src="{{ asset('Frontend/assets/img/img01.jpg') }}" alt="">
-                            <div class="service-overlay">
-                                <div class="service-caption">
-                                    <h5>Kernkompetenzen & Skill-Sets</h5>
-                                    <h6>BLIND Wie ich mich seit 11 Jahren in der Branche weiterentwickelt habe.</h6>
+                @foreach($services as $service)
+                    <div class="col-md-4 col-sm-6">
+                        <div class="service-item">
+                            <a href="">
+                                <img src="{{ asset('Upload/ServiceIcon/'.$service->image) }}" alt="">
+                                <div class="service-overlay">
+                                    <div class="service-caption">
+                                        <h5>{{ $service->title }}</h5>
+                                        <h6>{{ $service->sub_title }}</h6>
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="service-item">
-                        <a href="">
-                            <img src="{{ asset('Frontend/assets/img/img02.jpg') }}" alt="">
-                            <div class="service-overlay">
-                                <div class="service-caption">
-                                    <h5>Kernkompetenzen & Skill-Sets</h5>
-                                    <h6>BLIND Wie ich mich seit 11 Jahren in der Branche weiterentwickelt habe.</h6>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="service-item">
-                        <a href="">
-                            <img src="{{ asset('Frontend/assets/img/img03.jpg') }}" alt="">
-                            <div class="service-overlay">
-                                <div class="service-caption">
-                                    <h5>Kernkompetenzen & Skill-Sets</h5>
-                                    <h6>BLIND Wie ich mich seit 11 Jahren in der Branche weiterentwickelt habe.</h6>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="service-item">
-                        <a href="">
-                            <img src="{{ asset('Frontend/assets/img/img04.jpg') }}" alt="">
-                            <div class="service-overlay">
-                                <div class="service-caption">
-                                    <h5>Kernkompetenzen & Skill-Sets</h5>
-                                    <h6>BLIND Wie ich mich seit 11 Jahren in der Branche weiterentwickelt habe.</h6>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="service-item">
-                        <a href="">
-                            <img src="{{ asset('Frontend/assets/img/img05.jpg') }}" alt="">
-                            <div class="service-overlay">
-                                <div class="service-caption">
-                                    <h5>Kernkompetenzen & Skill-Sets</h5>
-                                    <h6>BLIND Wie ich mich seit 11 Jahren in der Branche weiterentwickelt habe.</h6>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="service-item">
-                        <a href="">
-                            <img src="{{ asset('Frontend/assets/img/img01.jpg') }}" alt="">
-                            <div class="service-overlay">
-                                <div class="service-caption">
-                                    <h5>Kernkompetenzen & Skill-Sets</h5>
-                                    <h6>BLIND Wie ich mich seit 11 Jahren in der Branche weiterentwickelt habe.</h6>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>

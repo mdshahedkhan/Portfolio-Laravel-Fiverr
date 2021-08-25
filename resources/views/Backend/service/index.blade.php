@@ -1,6 +1,5 @@
 @extends('Backend.Layout.App')
 @section('title', 'Services')
-
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -15,8 +14,8 @@
 
     <!-- Main content -->
     <section class="content">
-
-        <!-- Default box -->
+    @include("Error_message")
+    <!-- Default box -->
         <div class="box">
             <div class="box-header">
                 <div class="col-md-6">
@@ -31,25 +30,40 @@
                 <table id="service" class="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th>S.N</th>
+                            <th width="50px">S.N</th>
+                            <th width="80px">Service Icon</th>
                             <th>Title</th>
-                            <th>Sub Title</th>
-                            <th>Service Icon</th>
+                            <th width="600px">Sub Title</th>
+                            <th>Author</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Serial</td>
-                            <td>Service</td>
-                            <td>Subtitle</td>
-                            <td>Image</td>
-                            <td class="text-center">
-                                <a href="" class="btn btn-info btn-xs"><i class="fa fa-eye"></i></a>
-                                <a href="" class="btn btn-success btn-xs"><i class="fa fa-edit"></i></a>
-                                <a href="" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
-                            </td>
-                        </tr>
+                        @if($services->count())
+                            @foreach($services as $service)
+                                <tr class="removeItem{{ $service->id }}">
+                                    <td>{{ 1+$loop->index }}</td>
+                                    <td><img src="{{ asset('Upload/ServiceIcon/'.$service->image) }}" width="30px" alt=""></td>
+                                    <td>{{ ucwords($service->title) }}</td>
+                                    <td>{{ $service->sub_title }}</td>
+                                    <td>{{ $service->user->name }}</td>
+                                    <td><input type="checkbox" id="ChangeStatus" data-on="Active" data-id="{{ base64_encode($service->id) }}" data-off="Inactive" data-size="sm" data-onstyle="success" data-offstyle="danger"
+                                               data-toggle="toggle" {{ $service->status == 'active' ? 'checked':'' }}></td>
+                                    <td class="text-center">
+                                        {{--<a href="" class="btn btn-info btn-sm"><i class="fa fa-eye"></i></a>--}}
+                                        <a href="" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a>
+                                        <a href="javascript:avoid(0)" onclick="DeleteMethod('{{ route('staff.home.service.destroy', base64_encode($service->id)) }}', '{{ $service->id }}')" class="btn btn-danger btn-sm"
+                                           id=""><i
+                                                class="fa fa-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @else
+                            <tr>
+                                <td colspan="6" class="text-center">Recode Not Found.</td>
+                            </tr>
+                    @endif
                 </table>
             </div>
             <!-- /.box-body -->
@@ -62,22 +76,46 @@
 @endsection
 @section('CSS')
     <link rel="stylesheet" href="{{ asset('asset/backend/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
 @endsection
 
 @section('JS')
     <script src="{{ asset('asset/backend/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('asset/backend/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
     <script>
         $(function () {
             $('#example1').DataTable()
             $('#service').DataTable({
-                'paging'      : true,
+                'paging': true,
                 'lengthChange': false,
-                'searching'   : false,
-                'ordering'    : true,
-                'info'        : true,
-                'autoWidth'   : false
+                'searching': false,
+                'ordering': true,
+                'info': true,
+                'autoWidth': false
             })
-        })
+        });
+        $(document).on('change', '#ChangeStatus', function (event) {
+            event.preventDefault();
+            let id = $(this).data('id');
+            if (this.checked) {
+                var status = 'active';
+            } else {
+                var status = "inactive";
+            }
+            $.ajax({
+                url: "service/change-status/" + id + '/' + status,
+                type: "GET",
+                success: function (data) {
+                    if (data.statusCode == 200) {
+                        toastr.success(data.message)
+                    }
+                }
+            });
+        });
+
+
+
+
     </script>
 @endsection
