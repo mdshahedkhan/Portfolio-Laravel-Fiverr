@@ -90,137 +90,101 @@
             <div class="col-md-9">
                 <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#activity" data-toggle="tab" aria-expanded="true">Activity</a></li>
-                        <li class=""><a href="#timeline" data-toggle="tab" aria-expanded="false">Timeline</a></li>
+                        <li class="active"><a href="#general" data-toggle="tab" aria-expanded="true">General</a></li>
                         <li class=""><a href="#settings" data-toggle="tab" aria-expanded="false">Settings</a></li>
                     </ul>
                     <div class="tab-content">
-                        <div class="tab-pane active" id="activity">
+                        <div class="tab-pane active" id="general">
                             <!-- Post -->
-                            <div class="post">
-                                <div class="user-block">
-                                    <img class="img-circle img-bordered-sm" src="{{ asset('asset/backend/dist/img/user1-128x128.jpg') }}" alt="user image">
-                                    <span class="username">
-                                      <a href="#">Jonathan Burke Jr.</a>
-                                      <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
-                                    </span>
-                                    <span class="description">Shared publicly - 7:30 PM today</span>
+                            <form action="{{ route('staff.general.UpdateGeneralSetting') }}" id="UpdateGeneralSetting" method="post" class="form-horizontal">
+                                @method("PATCH")
+                                <div class="form-group row">
+                                    <label for="title" class="col-sm-2 control-label">Site Title</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="title" name="title" placeholder="Enter Website Title" value="{{ old('title') }}">
+                                    </div>
                                 </div>
-                                <!-- /.user-block -->
-                                <p>
-                                    Lorem ipsum represents a long-held tradition for designers,
-                                    typographers and the like. Some people hate it and argue for
-                                    its demise, but others ignore the hate as they create awesome
-                                    tools to help create filler text for everyone from bacon lovers
-                                    to Charlie Sheen fans.
-                                </p>
-                                <ul class="list-inline">
-                                    <li><a href="#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> Share</a></li>
-                                    <li><a href="#" class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i> Like</a>
-                                    </li>
-                                    <li class="pull-right">
-                                        <a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comments
-                                            (5)</a></li>
-                                </ul>
-
-                                <input class="form-control input-sm" type="text" placeholder="Type a comment">
-                            </div>
+                                <div class="form-group row">
+                                    <label for="site_prefix" class="col-sm-2 control-label">Site Prefix</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="site_prefix" name="site_prefix" placeholder="Enter Website Prefix Title" value="{{ old('site_prefix') }}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="meta_description" class="col-sm-2 control-label">Meta Description</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="meta_description" name="meta_description" placeholder="Enter Meta Description" value="{{ old('meta_description') }}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="meta_keywords" class="col-sm-2 control-label">Meta Keywords</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="meta_keywords" name="meta_keywords" placeholder="Enter Meta Keywords" value="{{ old('meta_keywords') }}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="meta_author" class="col-sm-2 control-label">Meta Author Name</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="meta_author" name="meta_author" placeholder="Enter Meta author" value="{{ old('meta_author') }}">
+                                    </div>
+                                </div>
+                                <div class="box-footer"></div>
+                                <div class="form-group row">
+                                    <label for="contact_email" class="col-sm-2 control-label">Contact E-mail</label>
+                                    <div class="col-sm-10">
+                                        <input type="email" class="form-control" id="contact_email" name="contact_email" placeholder="Enter Contact Mail" value="{{ old('contact_email') }}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 control-label">Social Media Links</label>
+                                    <div class="col-sm-10">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-facebook"></i></span>
+                                                    <input type="email" class="form-control" name="facebook_url" placeholder="Enter Your Facebook Page Or Profile Link">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-linkedin"></i></span>
+                                                    <input type="email" class="form-control" name="linkedin_url" placeholder="Linkedin">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-twitter"></i></span>
+                                                    <input type="email" class="form-control" name="twitter_url" placeholder="Twitter">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="logo" class="col-sm-2  mt-4 control-label">Logo</label>
+                                    <div class="col-sm-3 mt-4 ">
+                                        <input type="file" id="logo" onchange="ReadFileImage(this)" name="logo" >
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <img src="https://via.placeholder.com/100" width="20%" alt="" id="previewImage">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox"  class="UpdateCondition"> I agree to the
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="submit" class="btn btn-danger UpdateBtn" disabled>Update</button>
+                                    </div>
+                                </div>
+                            </form>
                             <!-- /.post -->
-                        </div>
-                        <!-- /.tab-pane -->
-                        <div class="tab-pane" id="timeline">
-                            <!-- The timeline -->
-                            <ul class="timeline timeline-inverse">
-                                <!-- timeline time label -->
-                                <li class="time-label">
-                                <span class="bg-red">
-                                  10 Feb. 2014
-                                </span>
-                                </li>
-                                <!-- /.timeline-label -->
-                                <!-- timeline item -->
-                                <li>
-                                    <i class="fa fa-envelope bg-blue"></i>
-
-                                    <div class="timeline-item">
-                                        <span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
-
-                                        <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
-
-                                        <div class="timeline-body">
-                                            Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
-                                            weebly ning heekya handango imeem plugg dopplr jibjab, movity
-                                            jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
-                                            quora plaxo ideeli hulu weebly balihoo...
-                                        </div>
-                                        <div class="timeline-footer">
-                                            <a class="btn btn-primary btn-xs">Read more</a>
-                                            <a class="btn btn-danger btn-xs">Delete</a>
-                                        </div>
-                                    </div>
-                                </li>
-                                <!-- END timeline item -->
-                                <!-- timeline item -->
-                                <li>
-                                    <i class="fa fa-user bg-aqua"></i>
-
-                                    <div class="timeline-item">
-                                        <span class="time"><i class="fa fa-clock-o"></i> 5 mins ago</span>
-
-                                        <h3 class="timeline-header no-border"><a href="#">Sarah Young</a> accepted your friend request
-                                        </h3>
-                                    </div>
-                                </li>
-                                <!-- END timeline item -->
-                                <!-- timeline item -->
-                                <li>
-                                    <i class="fa fa-comments bg-yellow"></i>
-
-                                    <div class="timeline-item">
-                                        <span class="time"><i class="fa fa-clock-o"></i> 27 mins ago</span>
-
-                                        <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
-
-                                        <div class="timeline-body">
-                                            Take me to your leader!
-                                            Switzerland is small and neutral!
-                                            We are more like Germany, ambitious and misunderstood!
-                                        </div>
-                                        <div class="timeline-footer">
-                                            <a class="btn btn-warning btn-flat btn-xs">View comment</a>
-                                        </div>
-                                    </div>
-                                </li>
-                                <!-- END timeline item -->
-                                <!-- timeline time label -->
-                                <li class="time-label">
-                        <span class="bg-green">
-                          3 Jan. 2014
-                        </span>
-                                </li>
-                                <!-- /.timeline-label -->
-                                <!-- timeline item -->
-                                <li>
-                                    <i class="fa fa-camera bg-purple"></i>
-
-                                    <div class="timeline-item">
-                                        <span class="time"><i class="fa fa-clock-o"></i> 2 days ago</span>
-
-                                        <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
-
-                                        <div class="timeline-body">
-                                            <img src="http://placehold.it/150x100" alt="..." class="margin">
-                                            <img src="http://placehold.it/150x100" alt="..." class="margin">
-                                            <img src="http://placehold.it/150x100" alt="..." class="margin">
-                                            <img src="http://placehold.it/150x100" alt="..." class="margin">
-                                        </div>
-                                    </div>
-                                </li>
-                                <!-- END timeline item -->
-                                <li>
-                                    <i class="fa fa-clock-o bg-gray"></i>
-                                </li>
-                            </ul>
                         </div>
                         <!-- /.tab-pane -->
 
@@ -276,14 +240,14 @@
                                     <div class="col-sm-offset-2 col-sm-10">
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" id="UpdateCondition"> are you sure update your info! I agree to the
+                                                <input type="checkbox"  class="UpdateCondition"> are you sure update your info! I agree to the
                                             </label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-offset-2 col-sm-10">
-                                        <button type="submit" id="UpdateBtn" class="btn btn-danger" disabled>Update</button>
+                                        <button type="submit" class="btn btn-danger UpdateBtn" disabled>Update</button>
                                     </div>
                                 </div>
                             </form>
@@ -303,12 +267,26 @@
 @endsection
 @section('JS')
     <script>
-        $('#UpdateCondition').change(function (){
+        $('.UpdateCondition').change(function (){
             if (this.checked){
-                $('#UpdateBtn').attr('disabled', false);
+                $('.UpdateBtn').attr('disabled', false);
             }else {
-                $('#UpdateBtn').attr('disabled', true);
+                $('.UpdateBtn').attr('disabled', true);
             }
         });
+        function ReadFileImage(input){
+            if (input.files){
+                const fileLength = input.files.length;
+                for (var i = 0; i < fileLength; i ++){
+                    const ImageFileReader = new FileReader();
+                    ImageFileReader.onload = function (event){
+                        const res = event.target.result;
+                        $('#previewImage').attr('src', res);
+                    }
+                    ImageFileReader.readAsDataURL(input.files[i]);
+
+                }
+            }
+        }
     </script>
 @endsection

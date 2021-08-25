@@ -70,4 +70,16 @@ class SiteController extends Controller
         return response()->json($response)->setStatusCode(Response::HTTP_OK);
         //return redirect()->action([AuthenticatedSessionController::class, 'destroy'])->with('message', $response['message']);
     }
+
+    public function UpdateGeneralSetting(Request $request)
+    {
+        $request->validate([
+            'title'            => 'required|min:6',
+            'site_prefix'      => 'required|min:6',
+            'meta_description' => 'nullable|min:10',
+            'meta_keywords'    => 'nullable|min:10',
+            'meta_author'      => 'nullable|min:5',
+            'contact_email'    => 'nullable|email',
+        ]);
+    }
 }

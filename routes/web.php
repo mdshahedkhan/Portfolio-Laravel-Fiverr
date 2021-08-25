@@ -38,6 +38,7 @@ Route::prefix('/staff')->name('staff.')->middleware('auth')->group(function () {
     Route::prefix('/general')->name('general.')->group(function (){
         Route::get('/', [SiteController::class, 'Setting'])->name('index');
         Route::patch('/user-update', [SiteController::class, 'userInfoUpdate'])->name('userInfoUpdate');
+        Route::patch('/update', [SiteController::class, 'UpdateGeneralSetting'])->name('UpdateGeneralSetting');
     });
 });
 

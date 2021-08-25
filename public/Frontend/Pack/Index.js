@@ -52,3 +52,20 @@ function ErrorMessage(errors) {
         toastr.error(value)
     });
 }
+
+
+$('#UpdateGeneralSetting').submit(function (event){
+    event.preventDefault();
+    const URL = $(this).attr('action');
+    $.ajax({
+        url: URL,
+        method: "POST",
+        data: $(this).serialize(),
+        success: function (result){
+
+        },
+        error: function (errors){
+            ErrorMessage(errors.responseJSON.errors);
+        }
+    });
+});
