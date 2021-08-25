@@ -61,11 +61,12 @@
 <html>
 
 <!-- Mirrored from adminlte.io/themes/AdminLTE/pages/examples/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 22 Apr 2021 10:14:09 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<!-- Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=utf-8"/><!-- /Added by HTTrack -->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | Log in</title>
+    <title>Admin | Log in</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -78,6 +79,7 @@
     <link rel="stylesheet" href="{{ asset('asset/backend/dist/css/AdminLTE.min.css') }}">
     <!-- iCheck -->
     <link rel="stylesheet" href="{{ asset('asset/backend/plugins/iCheck/square/blue.css') }}">
+    <link rel="stylesheet" href="{{ asset('Frontend/Pack/toastr.min.css') }}">
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -95,14 +97,14 @@
         <div class="login-box-body">
             <p class="login-box-msg">Sign in to start your session</p>
             @if($errors->any())
-            <div class="alert alert-danger">
-                <strong>Oops! something went wrong.</strong>
-                <ul>
-                    @foreach($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
+                <div class="alert alert-danger">
+                    <strong>Oops! something went wrong.</strong>
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
             @endif
             <form action="{{ route('login') }}" method="post">
                 @csrf
@@ -140,6 +142,7 @@
     <script src="{{ asset('asset/backend/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <!-- iCheck -->
     <script src="{{ asset('asset/backend/plugins/iCheck/icheck.min.js') }}"></script>
+    <script src="{{ asset('Frontend/Pack/toastr.min.js') }}"></script>
     <script>
         $(function () {
             $('input').iCheck({
@@ -149,5 +152,10 @@
             });
         });
     </script>
+    @if(session()->has('message'))
+        <script>
+            toastr.success("{{ session('message') }}");
+        </script>
+    @endif
 </body>
 </html>

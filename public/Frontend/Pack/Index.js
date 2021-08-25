@@ -3,6 +3,7 @@ $.ajaxSetup({
         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
     }
 });
+
 // Delete Method
 function DeleteMethod(URL, id) {
     event.preventDefault();
@@ -25,4 +26,29 @@ function DeleteMethod(URL, id) {
                 }
             });
         });
+}
+
+
+// User Update
+$('#userInfoUpdate').submit(function (event) {
+    event.preventDefault();
+    const url = $(this).attr('action');
+    $.ajax({
+        url,
+        type: "POST",
+        data: $('#userInfoUpdate').serialize(),
+        success: function (result) {
+            //window.location = result.redirectUrl;
+            window.location.href = "/staff/login";
+        },
+        error: function (err) {
+            ErrorMessage(err.responseJSON.errors);
+        }
+    });
+});
+
+function ErrorMessage(errors) {
+    $.each(errors, function (key, value) {
+        toastr.error(value)
+    });
 }

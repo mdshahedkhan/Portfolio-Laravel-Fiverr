@@ -91,7 +91,6 @@ class ServiceController extends Controller
             $service->status = $status;
             $service->save();
             return response()->json(['message' => 'Operation Successfully dane.', 'status' => '200', 'statusCode' => Response::HTTP_OK]);
-
         }
     }
 

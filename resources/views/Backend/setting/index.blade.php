@@ -4,7 +4,7 @@
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h1>S</h1>
+        <h1>Setting</h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
             <li><a href="#">General</a></li>
@@ -225,25 +225,25 @@
                         <!-- /.tab-pane -->
 
                         <div class="tab-pane" id="settings">
-                            <form class="form-horizontal" method="post" action="" enctype="multipart/form-data">
+                            <form class="form-horizontal" method="post" action="{{ route('staff.general.userInfoUpdate') }}" id="userInfoUpdate" enctype="multipart/form-data">
                                 @csrf
                                 @method('PATCH')
                                 <div class="form-group">
                                     <label for="inputName" class="col-sm-2 control-label">Name</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="inputName" placeholder="Name" value="{{ Auth::user()->name }}">
+                                        <input type="text" class="form-control" id="inputName" name="name" placeholder="Name" value="{{ Auth::user()->name }}">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputEmail" class="col-sm-2 control-label">Email</label>
                                     <div class="col-sm-10">
-                                        <input type="email" class="form-control" id="inputEmail" placeholder="Email"  value="{{ Auth::user()->email }}">
+                                        <input type="email" class="form-control" id="inputEmail" placeholder="Email" name="email"  value="{{ Auth::user()->email }}">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputCurrentPass" class="col-sm-2 control-label">Current Password</label>
                                     <div class="col-sm-10">
-                                        <input type="email" class="form-control" id="inputCurrentPass" placeholder="Current Password"  >
+                                        <input type="password" class="form-control" name="current_password" id="inputCurrentPass" placeholder="Current Password"  >
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -274,7 +274,16 @@
                                 </div>--}}
                                 <div class="form-group">
                                     <div class="col-sm-offset-2 col-sm-10">
-                                        <button type="submit" class="btn btn-danger">Update</button>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" id="UpdateCondition"> are you sure update your info! I agree to the
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="submit" id="UpdateBtn" class="btn btn-danger" disabled>Update</button>
                                     </div>
                                 </div>
                             </form>
@@ -291,4 +300,15 @@
 
     </section>
     <!-- /.content -->
+@endsection
+@section('JS')
+    <script>
+        $('#UpdateCondition').change(function (){
+            if (this.checked){
+                $('#UpdateBtn').attr('disabled', false);
+            }else {
+                $('#UpdateBtn').attr('disabled', true);
+            }
+        });
+    </script>
 @endsection

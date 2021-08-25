@@ -21,7 +21,8 @@ function RandomStatus()
     return array_rand($rand, 1);
 }
 
-function SetMessage(String $type, String $message){
+function SetMessage(string $type, string $message)
+{
     session()->flash('type', $type);
     session()->flash('message', $message);
 }
