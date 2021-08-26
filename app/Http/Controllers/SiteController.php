@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Image;
 use App\Models\User;
 use App\Models\Service;
 use Illuminate\Http\Request;
+use App\Models\GeneralSetting;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpFoundation\Response;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
@@ -18,8 +19,9 @@ class SiteController extends Controller
      */
     public function index()
     {
-        $services = Service::where('status', Service::$ACTIVE_STATUS)->orderBy('title', 'DESC')->get();
-        return view('welcome', compact('services'));
+        $services     = Service::where('status', Service::$ACTIVE_STATUS)->orderBy('title', 'DESC')->get();
+        $GeneralTITLE = GeneralSetting::where('id', 1)->first();
+        return view('welcome', compact('services', 'GeneralTITLE'));
     }
 
     /**
@@ -28,7 +30,8 @@ class SiteController extends Controller
 
     public function Setting()
     {
-        return view('Backend.setting.index');
+        $GeneralSetting = GeneralSetting::where('id', 1)->first();
+        return view('Backend.setting.index', compact('GeneralSetting'));
     }
 
     /**
@@ -45,7 +48,18 @@ class SiteController extends Controller
         ]);
         $response['status'] = Response::HTTP_OK;
         try {
-            $user        = User::where('id', Auth::user()->id)->first();
+            $user = User::where('id', Auth::user()->id)->first();
+            if ($request->hasFile('image')) {
+                $TempImg = $request->file('image');
+                if ($TempImg->getMimeType() === "image/jpeg" or $TempImg->getMimeType() === "image/png") {
+                    if (file_exists(public_path('Upload/Profile/' . $user->image))) {
+                        unlink(public_path('Upload/Profile/' . $user->image));
+                    }
+                    $image       = date('Ymdis') . uniqid() . '.' . $TempImg->getClientOriginalExtension();
+                    $user->image = $image;
+                    Image::make($TempImg)->resize(300, 300)->save('Upload/Profile/' . $image);
+                }
+            }
             $user->name  = $request->name;
             $user->email = $request->email;
             if ($request->current_password !== null) {
@@ -60,7 +74,6 @@ class SiteController extends Controller
             $response['message'] = 'Yah User has been successfully updated.';
             $logout              = new AuthenticatedSessionController();
             $logout->destroy($request);
-            //SetMessage('success', '');
             session()->flash('message', 'user has been successfully updated.');
             $response['redirectUrl'] = route('logout');
         } catch (\Exception $exception) {
@@ -81,5 +94,32 @@ class SiteController extends Controller
             'meta_author'      => 'nullable|min:5',
             'contact_email'    => 'nullable|email',
         ]);
+        $response['status'] = Response::HTTP_OK;
+        try {
+            $GeneralSetting = GeneralSetting::where('id', 1)->first();
+            if ($request->hasFile('logo')) {
+                $TempImg = $request->file('logo');
+                if ($TempImg->getMimeType() === 'image/jpeg' or $TempImg->getMimeType() === "image/png") {
+                    if (file_exists(public_path('Upload/General/' . $GeneralSetting->logo))) {
+                        unlink(public_path('Upload/General/' . $GeneralSetting->logo));
+                    }
+                    $logo                 = date('Ymdis') . uniqid() . '.' . $TempImg->getClientOriginalExtension();
+                    $GeneralSetting->logo = $logo;
+                    Image::make($TempImg)->resize(100, 100)->save('Upload/General/' . $logo);
+                }
+            }
+            $GeneralSetting->title            = $request->title;
+            $GeneralSetting->prefix           = $request->site_prefix;
+            $GeneralSetting->meta_description = $request->meta_description;
+            $GeneralSetting->meta_keyword     = $request->meta_keywords;
+            $GeneralSetting->meta_author      = $request->meta_author;
+            $GeneralSetting->email            = $request->contact_email;
+            $GeneralSetting->save();
+            $response['message'] = "Yah! General Setting has been successfully updated.";
+        } catch (\Exception $exception) {
+            $response['status']  = Response::HTTP_BAD_REQUEST;
+            $response['message'] = "Database Error, Please Contact Your Developer.";
+        }
+        return response()->json($response);
     }
 }

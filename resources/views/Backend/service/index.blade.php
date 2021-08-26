@@ -52,9 +52,8 @@
                                                data-toggle="toggle" {{ $service->status == 'active' ? 'checked':'' }}></td>
                                     <td class="text-center">
                                         {{--<a href="" class="btn btn-info btn-sm"><i class="fa fa-eye"></i></a>--}}
-                                        <a href="" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a>
-                                        <a href="javascript:avoid(0)" onclick="DeleteMethod('{{ route('staff.home.service.destroy', base64_encode($service->id)) }}', '{{ $service->id }}')" class="btn btn-danger btn-sm"
-                                           id=""><i
+                                        <a href="{{ route('staff.home.service.edit', base64_encode($service->id)) }}" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a>
+                                        <a href="javascript:avoid(0)" onclick="DeleteMethod('{{ route('staff.home.service.destroy', base64_encode($service->id)) }}', '{{ $service->id }}')" class="btn btn-danger btn-sm" ><i
                                                 class="fa fa-trash-o"></i></a>
                                     </td>
                                 </tr>

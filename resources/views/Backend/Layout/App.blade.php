@@ -69,7 +69,7 @@
                                         <li><!-- start message -->
                                             <a href="#">
                                                 <div class="pull-left">
-                                                    <img src="{{ asset('asset/backend/dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
+                                                    <img src="{{ asset('Upload/Profile/'.Auth::user()->image) }}" class="img-circle" alt="User Image">
                                                 </div>
                                                 <h4>Support Team<small><i class="fa fa-clock-o"></i> 5 mins</small>
                                                 </h4>
@@ -137,14 +137,14 @@
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="{{ asset('asset/backend/dist/img/user2-160x160.jpg') }}" class="user-image" alt="User Image">
+                                <img src="{{ asset('Upload/Profile/'.Auth::user()->image) }}" class="user-image" alt="User Image">
                                 <span class="hidden-xs">{{ Auth::user()->name }}</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header">
-                                    <img src="{{ asset('asset/backend/dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
-                                    <p>{{ Auth::user()->name }} - Supper Admin<small>Member since Nov. 2012</small>
+                                    <img src="{{ asset('Upload/Profile/'.Auth::user()->image) }}" class="img-circle" alt="User Image">
+                                    <p>{{ Auth::user()->name }} - Supper Admin<small>Member since: {{ date('D M Y', strtotime(Auth::user()->create_at)) }}</small>
                                     </p>
                                 </li>
                                 <!-- Menu Body -->

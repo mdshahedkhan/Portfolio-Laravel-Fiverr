@@ -17,6 +17,10 @@ class ServiceController extends Controller
         return view('Backend.service.index', compact('services'));
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse
+     */
     public function create(Request $request)
     {
         if ($request->isMethod('post')) {
@@ -59,7 +63,10 @@ class ServiceController extends Controller
         return view('Backend.service.create');
     }
 
-
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|void
+     */
     public function destroy($id)
     {
         $id = base64_decode($id);
@@ -92,6 +99,57 @@ class ServiceController extends Controller
             $service->save();
             return response()->json(['message' => 'Operation Successfully dane.', 'status' => '200', 'statusCode' => Response::HTTP_OK]);
         }
+    }
+
+    /**
+     * @param Request $request
+     * @param         $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse
+     */
+    public function edit(Request $request, $id)
+    {
+        $id      = base64_decode($id);
+        $service = Service::where('id', $id)->first();
+        if ($request->isMethod('PATCH')) {
+            $request->validate([
+                'title'        => 'required|min:6|max:40|unique:services,id,' . $id,
+                'sub_title'    => 'required|min:6|max:80',
+                'status'       => 'required',
+            ]);
+            try {
+                if ($request->hasFile('service_icon')) {
+                    $TempIcon = $request->file('service_icon');
+                    if ($TempIcon->isValid()) {
+                        if ($TempIcon->getMimeType() === "image/jpeg" || $TempIcon->getMimeType() === 'image/png') {
+                            if (file_exists(public_path('Upload/ServiceIcon/' . $service->image))) {
+                                unlink(public_path('Upload/ServiceIcon/' . $service->image));
+                            }
+                            $Icon = date('Ymdhis') . uniqid() . '.' . $TempIcon->getClientOriginalExtension();
+                            Image::make($TempIcon)->resize('390', '390')->save('Upload/ServiceIcon/' . $Icon);
+                            $service->image = $Icon;
+                        } else {
+                            SetMessage('danger', 'Invalid File');
+                            return redirect()->back();
+                        }
+                    } else {
+                        SetMessage('danger', 'Invalid File');
+                        return redirect()->back();
+                    }
+                }
+                $service->create_by = Auth::user()->id;
+                $service->title     = $request->title;
+                $service->sub_title = $request->sub_title;
+                $service->status    = $request->status;
+                $service->save();
+                SetMessage('success', 'Yah! your service has been successfully updated.');
+                return redirect()->back();
+            } catch (\Exception $exception) {
+                SetMessage('warning', 'Database Error, Please Contact Your Developer');
+                return redirect()->back();
+            }
+        }
+        $service = Service::where('id', $id)->first();
+        return view('Backend.service.edit', compact('service'));
     }
 
 }

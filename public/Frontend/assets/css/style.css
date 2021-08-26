@@ -131,6 +131,11 @@ body {
 
 .d-heading {
     font-weight: 700;
+    display: inline-block;
+}
+
+.profile-heading-txt {
+    padding: 10px 0;
 }
 
 .sub-heading {
@@ -368,8 +373,6 @@ body {
 #susbildung-section h2 {
     font-size: 40px;
     font-weight: 700;
-    width: 400px;
-
 }
 
 #susbildung-section .col-5 {
@@ -468,7 +471,28 @@ footer ul li {
     color: #00CE9E;
 }
 
+.footer-heading-txt {
+    font-size: 40px;
+}
+
 
 .visible-topScroll {
     display: none;
+}
+
+.text-highlight {
+    position: relative;
+    z-index: 50;
+}
+
+.text-highlight::before {
+    content: " ";
+    position: absolute;
+    bottom: 0.1em;
+    left: 0;
+    z-index: -1;
+    display: block;
+    width: 100%;
+    height: 0.4em;
+    background-color: rgba(0, 206, 158, 1);
 }

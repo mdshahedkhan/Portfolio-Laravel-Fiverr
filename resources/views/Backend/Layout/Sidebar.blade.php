@@ -4,7 +4,7 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="{{ asset('asset/backend/dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
+                <img src="{{ asset('Upload/Profile/'.Auth::user()->image) }}" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
                 <p>{{ Auth::user()->name }}</p>
@@ -25,8 +25,8 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="treeview {{ ActiveMenu('staff.dashboard') }}">
-                <a href="{{ route('staff.dashboard') }}">
+            <li class="{{ ActiveMenu('staff.dashboard') }}">
+                <a href="">
                     <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                 </a>
             </li>
@@ -34,8 +34,8 @@
                 <a href="javascript:;">
                     <i class="fa fa-home"></i> <span>Home</span>
                     <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
                 </a>
                 <ul class="treeview-menu" style="display: none;">
                     <li><a href=""><i class="fa fa-circle-o"></i> Meine & CV Download</a></li>
@@ -47,8 +47,8 @@
                 <a href="javascript:;">
                     <i class="fa fa-cog"></i> <span>General Setting</span>
                     <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
                 </a>
                 <ul class="treeview-menu" style="display: none;">
                     <li><a href="{{ route('staff.general.index') }}"><i class="fa fa-circle-o"></i> General</a></li>

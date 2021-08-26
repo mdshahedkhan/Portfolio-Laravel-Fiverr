@@ -32,13 +32,14 @@ Route::prefix('/staff')->name('staff.')->middleware('auth')->group(function () {
             Route::get('/', [ServiceController::class, 'index'])->name('index');
             Route::get('/change-status/{id}/{status}', [ServiceController::class, 'ChangeStatus'])->name('ChangeStatus');
             Route::match(['get', 'post'], '/create', [ServiceController::class, 'create'])->name('create');
+            Route::match(['get', 'PATCH'], '/edit/{id}', [ServiceController::class, 'edit'])->name('edit');
             Route::post('/destroy/{id}', [ServiceController::class, 'destroy'])->name('destroy');
         });
     });
     Route::prefix('/general')->name('general.')->group(function (){
         Route::get('/', [SiteController::class, 'Setting'])->name('index');
         Route::patch('/user-update', [SiteController::class, 'userInfoUpdate'])->name('userInfoUpdate');
-        Route::patch('/update', [SiteController::class, 'UpdateGeneralSetting'])->name('UpdateGeneralSetting');
+        Route::post('/update', [SiteController::class, 'UpdateGeneralSetting'])->name('UpdateGeneralSetting');
     });
 });
 

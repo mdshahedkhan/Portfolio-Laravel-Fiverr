@@ -36,13 +36,20 @@ $('#userInfoUpdate').submit(function (event) {
     $.ajax({
         url,
         type: "POST",
-        data: $('#userInfoUpdate').serialize(),
+        beforeSend: () => {
+            $('.UpdateBtn').html('<span class="fa fa-spin fa-spinner"></span> Loading..')
+        },
+        processData: false,
+        contentType: false,
+        data: new FormData(this),
         success: function (result) {
-            //window.location = result.redirectUrl;
             window.location.href = "/staff/login";
         },
         error: function (err) {
             ErrorMessage(err.responseJSON.errors);
+        },
+        complete: () => {
+            $('.UpdateBtn').html('Update')
         }
     });
 });
@@ -54,18 +61,56 @@ function ErrorMessage(errors) {
 }
 
 
-$('#UpdateGeneralSetting').submit(function (event){
+$('#UpdateGeneralSetting').submit(function (event) {
     event.preventDefault();
     const URL = $(this).attr('action');
     $.ajax({
         url: URL,
-        method: "POST",
-        data: $(this).serialize(),
-        success: function (result){
-
+        method: "post",
+        processData: false,
+        contentType: false,
+        beforeSend: () => {
+            $('.UpdateBtn').html('<span class="fa fa-spin fa-spinner"></span> Loading..')
         },
-        error: function (errors){
+        data: new FormData(this),
+        success: function (result) {
+            $('.UpdateBtn').attr('disabled', true);
+            $('.UpdateCondition').prop('checked', false);
+            if (result.status === 200) {
+                $('#UpdateGeneralSetting')[0].reset();
+                toastr.success(result.message)
+            } else {
+                toastr.warning(result.message)
+            }
+        },
+        error: function (errors) {
             ErrorMessage(errors.responseJSON.errors);
+            $('.UpdateBtn').attr('disabled', true);
+            $('.UpdateCondition').prop('checked', false)
+        },
+        complete: () => {
+            $('.UpdateBtn').html('Update');
         }
     });
+});
+
+
+function ReadFileImage(input, place) {
+    if (input.files) {
+        const fileLength = input.files.length;
+        for (var i = 0; i < fileLength; i++) {
+            const ImageFileReader = new FileReader();
+            ImageFileReader.onload = function (event) {
+                const res = event.target.result;
+                $('#' + place).attr('src', res);
+            }
+            ImageFileReader.readAsDataURL(input.files[i]);
+
+        }
+    }
+}
+
+
+$(document).on('change', '#edit_icon_service', function (event) {
+    ReadFileImage(this, 'IconPreviewImageProfile');
 });
