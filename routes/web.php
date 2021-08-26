@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\SponsorGalleryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,9 @@ Route::prefix('/staff')->name('staff.')->middleware('auth')->group(function () {
             Route::match(['get', 'post'], '/create', [ServiceController::class, 'create'])->name('create');
             Route::match(['get', 'PATCH'], '/edit/{id}', [ServiceController::class, 'edit'])->name('edit');
             Route::post('/destroy/{id}', [ServiceController::class, 'destroy'])->name('destroy');
+        });
+        Route::prefix('/sponsor-gallery')->name('sponsor.')->group(function (){
+            Route::get('/', [SponsorGalleryController::class, 'index']);
         });
     });
     Route::prefix('/general')->name('general.')->group(function (){

@@ -1,5 +1,5 @@
 @extends('Backend.Layout.App')
-@section('title', 'Create Service')
+@section('title', 'Update Service')
 
 @section('content')
     <!-- Content Header (Page header) -->
@@ -8,8 +8,7 @@
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="javascript:avoid(0)">Home</a></li>
-            <li class="active">Create Service</li>
+            <li class="active">Update Service</li>
         </ol>
     </section>
 

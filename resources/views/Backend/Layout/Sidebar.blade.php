@@ -26,11 +26,11 @@
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
             <li class="{{ ActiveMenu('staff.dashboard') }}">
-                <a href="">
+                <a href="{{ route('staff.dashboard') }}">
                     <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                 </a>
             </li>
-            <li class="treeview {{ PrefixActive('staff/home/') }}">
+            {{--<li class="treeview {{ PrefixActive('staff/home/') }}">
                 <a href="javascript:;">
                     <i class="fa fa-home"></i> <span>Home</span>
                     <span class="pull-right-container">
@@ -40,10 +40,20 @@
                 <ul class="treeview-menu" style="display: none;">
                     <li><a href=""><i class="fa fa-circle-o"></i> Meine & CV Download</a></li>
                     <li class=""><a href=""><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
-                    <li class="{{ ActiveMenu('staff.home.service.index') }}"><a href="{{ route('staff.home.service.index') }}"><i class="fa fa-circle-o"></i> Services</a></li>
+
                 </ul>
+            </li>--}}
+            <li class="{{ ActiveMenu('staff.home.service.index') }}">
+                <a href="{{ route('staff.home.service.index') }}" >
+                    <i class="fa fa-server"></i> <span>Services</span>
+                </a>
             </li>
-            <li class="treeview {{ PrefixActive('staff/home/') }}">
+            <li class="{{ ActiveMenu('staff.home.service.index') }}">
+                <a href="{{ route('staff.home.service.index') }}" >
+                    <i class="fa fa-picture-o"></i> <span>Sponsor And Gallery</span>
+                </a>
+            </li>
+            <li class="treeview ">
                 <a href="javascript:;">
                     <i class="fa fa-cog"></i> <span>General Setting</span>
                     <span class="pull-right-container">
@@ -53,6 +63,11 @@
                 <ul class="treeview-menu" style="display: none;">
                     <li><a href="{{ route('staff.general.index') }}"><i class="fa fa-circle-o"></i> General</a></li>
                 </ul>
+            </li>
+            <li class="btn-outline-danger">
+                <a href="javascript:avoid()" onclick="event.preventDefault(); document.getElementById('LogoutForm').submit()">
+                    <i class="fa fa-sign-out"></i> <span>Logout</span>
+                </a>
             </li>
         </ul>
     </section>

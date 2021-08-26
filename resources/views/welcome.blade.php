@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $GeneralTITLE->title }}</title>
+    <title>{{ $GeneralTITLE->title .' | '.$GeneralTITLE->prefix }}</title>
     <link href="{{ asset('Frontend/assets/css/bootstrap.min.css') }}" rel="stylesheet" rossorigin="anonymous">
     <!-- Add the slick-theme.css if you want default styling -->
     <link rel="stylesheet" type="text/css" href="{{ asset('Frontend/vendor/slick/slick.css') }}"/>
@@ -24,7 +24,7 @@
     <!--Navbar-->
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
-            <a href="#" class="navbar-brand"><span class="text-highlight">Florian Lafay</span></a>
+            <a href="#" class="navbar-brand"><span class="text-highlight">{{ $GeneralTITLE->title }}</span></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="navbar-toggler-icon"></i>
             </button>
@@ -54,7 +54,7 @@
             </div>
             <div class="content-section">
                 <div class="content-heading">
-                    <h2>Münchener Senior-Manager möchte <span class="text-highlight">wieder zurück in die Kreativstube</span></h2>
+                    <h2>Münchener Senior-Manager möchte <br><span class="text-highlight">wieder zurück in die Kreativstube</span></h2>
                     <h3>Liebe Frau Peterkowski,</h3>
                 </div>
                 <p>Zwei flinke Boxer jagen die quirlige Eva und ihren Mops durch Sylt. Franz jagt im komplett verwahrlosten Taxi quer durch Bayern. Zwölf Boxkämpfer jagen Viktor quer über den großen Sylter Deich. Vogel Quax
@@ -242,7 +242,9 @@
                 <li class="footer-item"><span class="material-icons">translate</span></li>
                 <li class="footer-item"><a href="{{ $GeneralTITLE->linkedin }}" target="_blank" style="color: #000"><i class="fab fa-linkedin-in"></i></a></li>
                 <li class="footer-item"><a href="{{ $GeneralTITLE->facebook }}" target="_blank" style="color: #000"><i class="fab fa-facebook"></i></a></li>
-                <li class="footer-item"><a href="{{ $GeneralTITLE->twitter }}" target="_blank" style="color: #000"><i class="fab fa-twitter"></i></a></li>
+                @if($GeneralTITLE->twitter)
+                    <li class="footer-item"><a href="{{ $GeneralTITLE->twitter }}" target="_blank" style="color: #000"><i class="fab fa-twitter"></i></a></li>
+                @endif
             </ul>
         </div>
     </footer>
