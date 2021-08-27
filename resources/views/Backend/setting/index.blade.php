@@ -1,5 +1,5 @@
 @extends('Backend.Layout.App')
-@section('title', 'Create Service')
+@section('title', 'General Setting')
 
 @section('content')
     <!-- Content Header (Page header) -->

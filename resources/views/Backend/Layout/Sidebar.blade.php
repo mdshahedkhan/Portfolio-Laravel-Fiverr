@@ -48,9 +48,9 @@
                     <i class="fa fa-server"></i> <span>Services</span>
                 </a>
             </li>
-            <li class="{{ ActiveMenu('staff.home.service.index') }}">
-                <a href="{{ route('staff.home.service.index') }}" >
-                    <i class="fa fa-picture-o"></i> <span>Sponsor And Gallery</span>
+            <li class="{{ ActiveMenu('staff.home.brand.index') }}">
+                <a href="{{ route('staff.home.brand.index') }}" >
+                    <i class="fa fa-picture-o"></i> <span>Home Brand</span>
                 </a>
             </li>
             <li class="treeview ">

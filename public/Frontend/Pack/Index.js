@@ -43,7 +43,11 @@ $('#userInfoUpdate').submit(function (event) {
         contentType: false,
         data: new FormData(this),
         success: function (result) {
-            window.location.href = "/staff/login";
+            if(result.status === 200 || result.status === 201){
+                window.location.href = "/staff/login";
+            }else{
+                toastr.error(result.message);
+            }
         },
         error: function (err) {
             ErrorMessage(err.responseJSON.errors);

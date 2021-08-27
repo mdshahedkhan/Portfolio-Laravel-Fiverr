@@ -24,7 +24,7 @@ class GeneralSettingSeeder extends Seeder
             'meta_keyword'     => $faker->realText,
             'meta_author'      => $faker->name,
             'email'            => $faker->email,
-            'logo'             => $faker->image
+            'logo'             => $faker->imageUrl
         ]);
     }
 }

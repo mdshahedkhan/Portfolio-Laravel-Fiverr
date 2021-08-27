@@ -2,9 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SiteController;
+use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ServiceController;
-use App\Http\Controllers\Admin\SponsorGalleryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,8 +36,12 @@ Route::prefix('/staff')->name('staff.')->middleware('auth')->group(function () {
             Route::match(['get', 'PATCH'], '/edit/{id}', [ServiceController::class, 'edit'])->name('edit');
             Route::post('/destroy/{id}', [ServiceController::class, 'destroy'])->name('destroy');
         });
-        Route::prefix('/sponsor-gallery')->name('sponsor.')->group(function (){
-            Route::get('/', [SponsorGalleryController::class, 'index']);
+        Route::prefix('/brand')->name('brand.')->group(function () {
+            Route::get('/', [BrandController::class, 'index'])->name('index');
+            Route::get('/change-status/{id}/{status}', [BrandController::class, 'ChangeStatus'])->name('ChangeStatus');
+            Route::match(['get', 'post'], '/create', [BrandController::class, 'create'])->name('create');
+            Route::match(['get', 'post'], '/edit/{id}', [BrandController::class, 'edit'])->name('edit');
+            Route::post('/destroy/{id}', [BrandController::class, 'destroy'])->name('destroy');
         });
     });
     Route::prefix('/general')->name('general.')->group(function (){
