@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
 use Image;
 use App\Models\User;
 use App\Models\Service;
@@ -21,7 +22,8 @@ class SiteController extends Controller
     {
         $services     = Service::where('status', Service::$ACTIVE_STATUS)->orderBy('title', 'DESC')->get();
         $GeneralTITLE = GeneralSetting::where('id', 1)->first();
-        return view('welcome', compact('services', 'GeneralTITLE'));
+        $brands       = Brand::latest()->get();
+        return view('welcome', compact('services', 'GeneralTITLE', 'brands'));
     }
 
     /**

@@ -173,18 +173,9 @@
     <div id="slick-section">
         <div class="col-md-12">
             <div class="slider responsive">
-                <img src="{{ asset('Frontend/assets/img/slick/01.jpg') }}" alt="">
-                <img src="{{ asset('Frontend/assets/img/slick/02.jpg') }}" alt="">
-                <img src="{{ asset('Frontend/assets/img/slick/01.jpg') }}" alt="">
-                <img src="{{ asset('Frontend/assets/img/slick/02.jpg') }}" alt="">
-                <img src="{{ asset('Frontend/assets/img/slick/01.jpg') }}" alt="">
-                <img src="{{ asset('Frontend/assets/img/slick/02.jpg') }}" alt="">
-                <img src="{{ asset('Frontend/assets/img/slick/01.jpg') }}" alt="">
-                <img src="{{ asset('Frontend/assets/img/slick/02.jpg') }}" alt="">
-                <img src="{{ asset('Frontend/assets/img/slick/01.jpg') }}" alt="">
-                <img src="{{ asset('Frontend/assets/img/slick/02.jpg') }}" alt="">
-                <img src="{{ asset('Frontend/assets/img/slick/01.jpg') }}" alt="">
-                <img src="{{ asset('Frontend/assets/img/slick/02.jpg') }}" alt="">
+                @foreach($brands as $brand)
+                    <img src="{{ asset('Upload/Brand/'.$brand->brand_img) }}" alt="">
+                @endforeach
             </div>
             {{--<input type="range" min="0" max="100" id="slider">--}}
         </div>

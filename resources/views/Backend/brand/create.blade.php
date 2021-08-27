@@ -24,12 +24,12 @@
                         <h3 class="box-title">Create Service Form</h3>
                     </div>
                     <div class="col-md-6 text-right">
-                        <a href="{{ route('staff.home.service.index') }}" class="btn btn-primary"><i class="fa fa-list"></i> Service Management</a>
+                        <a href="{{ route('staff.home.brand.index') }}" class="btn btn-primary"><i class="fa fa-list"></i> Service Management</a>
                     </div>
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form role="form" method="post" class="col-md-10 col-md-offset-1" enctype="multipart/form-data" action="{{ route('staff.home.service.create') }}">
+                <form role="form" method="post" class="col-md-10 col-md-offset-1" enctype="multipart/form-data" action="{{ route('staff.home.brand.create') }}">
                     @csrf
                     <div class="box-body">
                         <div class="form-group">
@@ -38,14 +38,11 @@
                             @error('title') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
                         <div class="form-group">
-                            <label for="sub_title">Sub Title</label>
-                            <input type="text" class="form-control @error('sub_title') is-invalid @enderror" id="sub_title" value="{{ old('sub_title') }}" name="sub_title" placeholder="Title">
-                            @error('sub_title') <span class="text-danger">{{ $message }}</span> @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="service_icon">Service Icon</label>
-                            <input type="file" id="service_icon" name="service_icon">
+                            <label for="service_icon">Brand Image</label>
+                            <input type="file" id="service_icon" name="brand_image">
+                            <p>{{ ucwords('Image Size Must be (width:260px, Height: 290px)') }}</p>
                             @error('service_icon') <span class="text-danger">{{ $message }}</span> @enderror
+
                         </div>
                         <div class="form-group">
                             <div class="row">

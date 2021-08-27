@@ -44,7 +44,7 @@
                             @foreach($brands as $Brand)
                                 <tr class="removeItem{{ $Brand->id }}">
                                     <td>{{ 1+$loop->index }}</td>
-                                    <td><img src="{{ asset('Upload/BrandIcon/'.$Brand->brand_img) }}" width="30px" alt=""></td>
+                                    <td><img src="{{ asset('Upload/Brand/'.$Brand->brand_img) }}" width="30px" alt=""></td>
                                     <td>{{ ucwords($Brand->title) }}</td>
                                     <td>{{ $Brand->slug }}</td>
                                     <td>{{ $Brand->user->name }}</td>

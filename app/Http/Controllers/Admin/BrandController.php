@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use Image;
 use App\Models\Brand;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Redirect;
 use Symfony\Component\HttpFoundation\Response;
 
 class BrandController extends Controller
@@ -13,6 +17,44 @@ class BrandController extends Controller
     {
         $brands = Brand::with('user')->latest()->get();
         return view('Backend.brand.index', compact('brands'));
+    }
+
+    public function create(Request $request)
+    {
+        if ($request->isMethod('POST')) {
+            $request->validate([
+                'title'       => 'required|min:4|unique:brands',
+                'status'      => 'required',
+                'brand_image' => 'required'
+            ]);
+            try {
+                if ($request->hasFile('brand_image')) {
+                    $TempImage = $request->file('brand_image');
+                    if ($TempImage->getClientMimeType() === 'image/jpeg' || $TempImage->getClientMimeType() === 'image/png') {
+                        $image = date('Ymdhis') . uniqid() . '.' . $TempImage->getClientOriginalExtension();
+                        $brand = Brand::create([
+                            'create_by' => Auth::user()->id,
+                            'title'     => $request->title,
+                            'slug'      => Str::slug($request->title),
+                            'status'    => $request->status,
+                            'brand_img' => $image,
+                        ]);
+                        if ($brand) {
+                            SetMessage('success', 'Yah! brand has been successfully added.');
+                        }
+                        Image::make($TempImage)->resize(260, 190)->save('Upload/Brand/' . $image);
+                    } else {
+                        SetMessage('danger', 'Invalid image: Please Insert Valid Image');
+                    }
+
+                }
+            } catch (\Exception $exception) {
+                SetMessage('danger', 'Database Error: please contact your developer');
+                return $exception->getMessage();
+            }
+            return Redirect::back();
+        }
+        return view('Backend.brand.create');
     }
 
     /**
