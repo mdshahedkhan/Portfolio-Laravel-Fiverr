@@ -3,8 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\Admin\BrandController;
-use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\AboutMeController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +37,11 @@ Route::prefix('/staff')->name('staff.')->middleware('auth')->group(function () {
             Route::match(['get', 'PATCH'], '/edit/{id}', [ServiceController::class, 'edit'])->name('edit');
             Route::post('/destroy/{id}', [ServiceController::class, 'destroy'])->name('destroy');
         });
+        /** About Me Route Define */
+        Route::prefix('/aboutme')->name('aboutme.')->group(function () {
+            Route::get('/', [AboutMeController::class, 'index'])->name('index');
+        });
+        /*General Setting Route*/
         Route::prefix('/brand')->name('brand.')->group(function () {
             Route::get('/', [BrandController::class, 'index'])->name('index');
             Route::get('/change-status/{id}/{status}', [BrandController::class, 'ChangeStatus'])->name('ChangeStatus');
@@ -44,6 +50,7 @@ Route::prefix('/staff')->name('staff.')->middleware('auth')->group(function () {
             Route::post('/destroy/{id}', [BrandController::class, 'destroy'])->name('destroy');
         });
     });
+    // General Setting Route
     Route::prefix('/general')->name('general.')->group(function (){
         Route::get('/', [SiteController::class, 'Setting'])->name('index');
         Route::patch('/user-update', [SiteController::class, 'userInfoUpdate'])->name('userInfoUpdate');

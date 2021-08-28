@@ -53,6 +53,11 @@
                     <i class="fa fa-picture-o"></i> <span>Home Brand</span>
                 </a>
             </li>
+            <li class="{{ ActiveMenu('staff.home.brand.index') }}">
+                <a href="{{ route('staff.home.brand.index') }}" >
+                    <i class="fa fa-picture-o"></i> <span>Home Brand</span>
+                </a>
+            </li>
             <li class="treeview ">
                 <a href="javascript:;">
                     <i class="fa fa-cog"></i> <span>General Setting</span>

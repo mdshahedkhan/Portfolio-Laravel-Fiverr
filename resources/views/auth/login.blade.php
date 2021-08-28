@@ -56,17 +56,13 @@
     </x-auth-card>
 </x-guest-layout>
 --}}
-
     <!DOCTYPE html>
 <html>
-
-<!-- Mirrored from adminlte.io/themes/AdminLTE/pages/examples/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 22 Apr 2021 10:14:09 GMT -->
-<!-- Added by HTTrack -->
 <meta http-equiv="content-type" content="text/html;charset=utf-8"/><!-- /Added by HTTrack -->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Admin | Log in</title>
+    <title>{{ $GeneralSetting->title }} | Log in</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -91,7 +87,7 @@
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a href="{{ route('index') }}"><b>Admin</b>LTE</a>
+            <a href="{{ route('index') }}"><b>{{ $GeneralSetting->title }}</b><span style="font-size: 25px"> {{ $GeneralSetting->prefix }}</span></a>
         </div>
         <!-- /.login-logo -->
         <div class="login-box-body">

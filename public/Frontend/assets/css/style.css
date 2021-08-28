@@ -56,7 +56,7 @@ body {
 }
 
 #hero-section .title-box {
-    width: 520px;
+    width: 45%;
     overflow: hidden;
     padding: 45px 35px;
     background: #000000;
@@ -66,7 +66,7 @@ body {
 }
 
 #hero-section .title-box img {
-    width: 303px;
+    width: 30%;
     float: left;
     margin: 0 20px 0 0;
 }
@@ -121,8 +121,8 @@ body {
     margin: 35px 0;
 }
 
-.signeture {
-    width: 30px;
+.signature {
+    width: 30%;
     margin: 50px 0;
 }
 
@@ -146,14 +146,17 @@ body {
 
 #florian-section .col-md-8 p {
     font-size: 17px;
-    font-width: 700;
+    font-weight: 700;
     padding: 30px 0;
 }
 
 .col-md-8-profile {
-    width: 76%;
-    position: relative;
+    width: 70%;
     padding: 60px 50px 20px !important;
+}
+.col-md-8-profile-img {
+    position: relative;
+    transform: translateX(-22%);
 }
 
 .display-img {
@@ -380,7 +383,6 @@ body {
     width: 48.5%;
     align-items: center;
     justify-content: right;
-    height: 600px;
 }
 
 .box-2 {
@@ -495,3 +497,4 @@ footer ul li {
     height: 0.4em;
     background-color: rgba(0, 206, 158, 1);
 }
+

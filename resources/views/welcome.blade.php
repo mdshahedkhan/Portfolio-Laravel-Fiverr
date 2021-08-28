@@ -14,6 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
     <link rel="shortcut icon" href="{{ asset('Upload/General/'.$GeneralTITLE->logo) }}" type="image/x-icon">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
+    <link rel="stylesheet" href="{{ asset('Frontend/assets/css/Responsive.css') }}">
 </head>
 <body>
     <div class="visible-topScroll">
@@ -24,7 +25,7 @@
     <!--Navbar-->
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
-            <a href="#" class="navbar-brand"><span class="text-highlight">{{ $GeneralTITLE->title }}</span></a>
+            <a href="{{ route('index') }}" class="navbar-brand"><span class="text-highlight">{{ $GeneralTITLE->title }}</span></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="navbar-toggler-icon"></i>
             </button>
@@ -42,13 +43,13 @@
             <div class="row-hero">
                 <div class="title-box">
                     <img src="{{ asset('Upload/General/'.$GeneralTITLE->logo) }}" width="130px" alt="">
-                    <h4>Herzlich Willkommen Frau Meierkowski</h4>
+                    <h4>Herzlich <br>Willkommen <br>Frau Meierkowski</h4>
                 </div>
                 <div class="title-box">
                     <h4>Meine Bewerbung um die Stelle als <span class="text-highlight">Creative Director</span></h4>
                     <div class="btn-group">
                         <a href="" class="btn btn-direkt">Direkt zu den Referenzen</a>
-                        <a href="" class="btn btn-download" download>Download CV</a>
+                        <a href="{{ $AboutMe->download_resume }}" class="btn btn-download" download>Download CV</a>
                     </div>
                 </div>
             </div>
@@ -70,8 +71,8 @@
                     großen Sylter Deich. Vogel Quax zwickt Johnys Pferd Bim. Sylvia wagt quick den Jux bei Pforzheim. Polyfon zwitschernd aßen Mäxchens Vögel Rüben, Joghurt und Quark. "Fix, Schwyz!" quäkt Jürgen blöd vom
                     Paß. Victor jagt zwölf Boxkämpfer quer über den großen Sylter Deich. Falsches Üben von Xylophonmusik quält jeden größeren Zwerg. Heizölrückstoßabdämpfung.Zwei flinke Boxer jagen die quirlige Eva und ihren
                     Mops durch Sylt. Franz jagt im komplett verwahrlosten Taxi quer.</p>
-                <div class="signeture">
-                    <img src="{{ asset('Frontend/assets/img/signeture.png') }}" alt="Signeture">
+                <div class="signature">
+                    <img src="{{ $AboutMe->signature }}" alt="signature">
                 </div>
             </div>
         </div>
@@ -79,18 +80,20 @@
     <section id="florian-section">
         <div class="container">
             <div class="row">
-                <div class="col-md-8-profile bg-light">
-                    <h2 class="d-heading" style="font-size: 45px">Florian Lafay</h2>
-                    <div>
-                        <h2 class="d-heading profile-heading-txt"><span class="text-highlight">Lead Designer, Account Manager, Art Director & mehr</span></h2>
-                    </div>
-                    <span>Mobile: +49 175 208 79 62</span>
-                    <span class="m-5">E-Mail: lafayflorian@gmail.com</span>
-                    <p class="p-text">Als Digital Native blicke ich auf mittlerweile 10 erfolgreiche Jahre in der Werbe- und Marketingbranche zurück. Dabei begleitete ich bisher Marken wie Fujitsu, LOTTO Bayern und F-Secure
-                        als Senior Project-Manager, digitaler Designer und auf Art-Direktions-Basis.</p>
+                <div class="col-md-8-profile-img">
                     <div class="display-img">
                         <img src="{{ asset('Frontend/assets/img/profile-img.png') }}" alt="Profile">
                     </div>
+                </div>
+                <div class="col-md-8-profile bg-light">
+                    <h2 class="d-heading" style="font-size: 45px">{{ ucwords($AboutMe->name) }}</h2>
+                    <div>
+                        <h2 class="d-heading profile-heading-txt"><span class="text-highlight">{{ $AboutMe->short_story }}</span></h2>
+                    </div>
+                    <span>Mobile: <a href="tel:+{{ $AboutMe->mobile }}" style="color: #000000">+{{ $AboutMe->mobile }}</a></span>
+                    <span class="m-5">E-Mail: <a href="mailto:{{ $AboutMe->email_address }}" style="color: #000000">{{ $AboutMe->email_address }}</a></span>
+                    <p class="p-text">{{ $AboutMe->about_me }}</p>
+
                 </div>
             </div>
         </div>
@@ -174,10 +177,9 @@
         <div class="col-md-12">
             <div class="slider responsive">
                 @foreach($brands as $brand)
-                    <img src="{{ asset('Upload/Brand/'.$brand->brand_img) }}" alt="">
+                    <img src="{{ asset('Upload/Brand/'.$brand->brand_img) }}" alt="{{ $brand->title }}">
                 @endforeach
             </div>
-            {{--<input type="range" min="0" max="100" id="slider">--}}
         </div>
     </div>
     <div id="susbildung-section">

@@ -1,18 +1,17 @@
 @extends('Backend.Layout.App')
-@section('title', 'Create Service')
+@section('title', 'Create Brand')
 
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h1>Service<small>it all starts here</small>
+        <h1>Brand<small>it all starts here</small>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
             <li><a href="javascript:avoid(0)">Home</a></li>
-            <li class="active">Create Service</li>
+            <li class="active">@yield('title')</li>
         </ol>
     </section>
-
     <!-- Main content -->
     <section class="content">
         <div class="col-md-8 col-md-offset-2">
@@ -21,10 +20,10 @@
             <div class="box box-primary col-md-6">
                 <div class="box-header with-border">
                     <div class="col-md-6">
-                        <h3 class="box-title">Create Service Form</h3>
+                        <h3 class="box-title">Create Brand Form</h3>
                     </div>
                     <div class="col-md-6 text-right">
-                        <a href="{{ route('staff.home.brand.index') }}" class="btn btn-primary"><i class="fa fa-list"></i> Service Management</a>
+                        <a href="{{ route('staff.home.brand.index') }}" class="btn btn-primary"><i class="fa fa-list"></i> Brand Management</a>
                     </div>
                 </div>
                 <!-- /.box-header -->
@@ -42,7 +41,6 @@
                             <input type="file" id="service_icon" name="brand_image">
                             <p>{{ ucwords('Image Size Must be (width:260px, Height: 290px)') }}</p>
                             @error('service_icon') <span class="text-danger">{{ $message }}</span> @enderror
-
                         </div>
                         <div class="form-group">
                             <div class="row">
@@ -63,7 +61,7 @@
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Create</button>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Create Brand</button>
                     </div>
                 </form>
             </div>
