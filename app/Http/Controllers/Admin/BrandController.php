@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 use Image;
+use Exception;
 use App\Models\Brand;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
 use Symfony\Component\HttpFoundation\Response;
@@ -35,7 +36,7 @@ class BrandController extends Controller
                         $brand = Brand::create([
                             'create_by' => Auth::user()->id,
                             'title'     => $request->title,
-                            'slug'      => Str::slug($request->title),
+                            'slug'      => strtolower(Str::slug($request->title)),
                             'status'    => $request->status,
                             'brand_img' => $image,
                         ]);
@@ -55,6 +56,49 @@ class BrandController extends Controller
             return Redirect::back();
         }
         return view('Backend.brand.create');
+    }
+
+    public function edit(Request $request, $id)
+    {
+        $id    = base64_decode($id);
+        $brand = Brand::where('id', $id)->first();
+        if ($request->isMethod('PATCH')) {
+            $request->validate([
+                'title'       => 'required|min:4|max:30|unique:brands,id,' . $id,
+                'brand_image' => 'nullable',
+                'status'      => 'required'
+            ]);
+            try {
+                if ($request->hasFile('brand_image')) {
+                    $TempImage = $request->file('brand_image');
+                    if ($TempImage->isValid()) {
+                        if ($TempImage->getClientMimeType() === 'image/jpeg' || $TempImage->getMimeType() === 'image/png') {
+                            if (file_exists(public_path('Upload/Brand/' . $brand->brand_img))) {
+                                unlink(public_path('Upload/Brand/' . $brand->brand_img));
+                            }
+                            $brand_img        = date('Ymdhis') . uniqid() . '.' . $TempImage->getClientOriginalExtension();
+                            $brand->brand_img = $brand_img;
+                            Image::make($TempImage)->resize(260, 190)->save('Upload/Brand/' . $brand_img);
+                        } else {
+                            SetMessage('danger', 'Invalid Image');
+                        }
+                    } else {
+                        SetMessage('danger', 'Invalid Image');
+                        return redirect()->back();
+                    }
+                }
+                $brand->create_by = Auth::user()->id;
+                $brand->title     = $request->title;
+                $brand->slug      = strtolower(Str::slug($request->title, '-'));
+                $brand->status    = $request->status;
+                $brand->save();
+                SetMessage('success', 'Yah! brand has been successfully updated.');
+            } catch (Exception $exception) {
+                SetMessage('danger', 'Database Error: Please Contact Your Developer');
+            }
+            return redirect()->back();
+        }
+        return view('Backend.brand.edit', compact('brand'));
     }
 
     /**

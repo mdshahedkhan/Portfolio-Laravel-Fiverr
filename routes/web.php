@@ -26,7 +26,6 @@ Route::get('/', [SiteController::class, 'index'])->name('index');
 
 Route::prefix('/staff')->name('staff.')->middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
     /*Frontend Route */
     Route::prefix('/home')->name('home.')->group(function () {
         // Service Section Route
@@ -40,13 +39,15 @@ Route::prefix('/staff')->name('staff.')->middleware('auth')->group(function () {
         /** About Me Route Define */
         Route::prefix('/aboutme')->name('aboutme.')->group(function () {
             Route::get('/', [AboutMeController::class, 'index'])->name('index');
+            Route::get('/edit/{id}', [AboutMeController::class, 'UpdateMe'])->name('edit');
+            Route::post('/edit/{id}', [AboutMeController::class, 'UpdateStore'])->name('update');
         });
         /*General Setting Route*/
         Route::prefix('/brand')->name('brand.')->group(function () {
             Route::get('/', [BrandController::class, 'index'])->name('index');
             Route::get('/change-status/{id}/{status}', [BrandController::class, 'ChangeStatus'])->name('ChangeStatus');
             Route::match(['get', 'post'], '/create', [BrandController::class, 'create'])->name('create');
-            Route::match(['get', 'post'], '/edit/{id}', [BrandController::class, 'edit'])->name('edit');
+            Route::match(['get', 'PATCH'], '/edit/{id}', [BrandController::class, 'edit'])->name('edit');
             Route::post('/destroy/{id}', [BrandController::class, 'destroy'])->name('destroy');
         });
     });

@@ -232,7 +232,7 @@
                 <li>Datenschutz</li>
             </ul>
             <ul class="footer-menu-social">
-                <li class="footer-item"><span class="material-icons">translate</span></li>
+                <li class="footer-item"><span class="material-icons" style="font-size: 20px">translate</span></li>
                 <li class="footer-item"><a href="{{ $GeneralTITLE->linkedin }}" target="_blank" style="color: #000"><i class="fab fa-linkedin-in"></i></a></li>
                 <li class="footer-item"><a href="{{ $GeneralTITLE->facebook }}" target="_blank" style="color: #000"><i class="fab fa-facebook"></i></a></li>
                 @if($GeneralTITLE->twitter)

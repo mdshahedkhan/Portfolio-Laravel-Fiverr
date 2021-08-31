@@ -1,16 +1,17 @@
 @extends('Backend.Layout.App')
-@section('title', 'Update Brand')
+@section('title', 'Update Service')
 
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h1>@yield('title')<small>it all starts here</small>
+        <h1>Service<small>it all starts here</small>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="{{ route('staff.dashboard') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">@yield('title')</li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Update Service</li>
         </ol>
     </section>
+
     <!-- Main content -->
     <section class="content">
         <div class="col-md-8 col-md-offset-2">
@@ -19,30 +20,40 @@
             <div class="box box-primary col-md-6">
                 <div class="box-header with-border">
                     <div class="col-md-6">
-                        <h3 class="box-title">Update Brand Form</h3>
+                        <h3 class="box-title">Create Service Form</h3>
                     </div>
                     <div class="col-md-6 text-right">
-                        <a href="{{ route('staff.home.brand.index') }}" class="btn btn-primary"><i class="fa fa-list"></i> Brand Management</a>
+                        <a href="{{ route('staff.home.service.index') }}" class="btn btn-primary"><i class="fa fa-list"></i> Service Management</a>
                     </div>
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form role="form" method="post" class="col-md-10 col-md-offset-1" enctype="multipart/form-data" action="{{ route('staff.home.brand.edit', base64_encode($brand->id)) }}">
+                <form role="form" method="post" class="col-md-10 col-md-offset-1" enctype="multipart/form-data" action="{{ route('staff.home.service.edit', base64_encode($service->id)) }}">
                     @csrf
                     @method('PATCH')
                     <div class="box-body">
                         <div class="form-group">
                             <label for="title">Title</label>
-                            <input type="text" class="form-control is-invalid @error('title') is-invalid @enderror" id="title" name="title" value="{{ $brand->title }}" placeholder="Enter Title">
+                            <input type="text" class="form-control is-invalid @error('title') is-invalid @enderror" id="title" name="title" value="{{ $service->title }}" placeholder="Enter Title">
                             @error('title') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
+                        <div class="form-group">
+                            <label for="sub_title">Sub Title</label>
+                            <input type="text" class="form-control @error('sub_title') is-invalid @enderror" id="sub_title" value="{{ $service->sub_title }}" name="sub_title" placeholder="Title">
+                            @error('sub_title') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>
+                        {{--<div class="form-group">
+                            <label for="service_icon">Service Icon</label>
+                            <input type="file" id="service_icon" name="service_icon">
+                            @error('service_icon') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>--}}
                         <div class="form-group row">
-                            <label for="image" class="col-sm-2  mt-4 control-label">Brand Image</label>
+                            <label for="image" class="col-sm-2  mt-4 control-label">Profile Image</label>
                             <div class="col-sm-3 mt-4 ">
-                                <input type="file" id="edit_icon_service" name="brand_image">
+                                <input type="file" id="edit_icon_service" name="service_icon">
                             </div>
                             <div class="col-sm-4">
-                                <img src="{{ asset('Upload/Brand/'.$brand->brand_img) }}" width="30%" alt="{{ $brand->title }}" id="IconPreviewImageProfile">
+                                <img src="{{ asset('Upload/ServiceIcon/'.$service->image) }}" width="20%" alt="" id="IconPreviewImageProfile">
                             </div>
                         </div>
                         <div class="form-group">
@@ -52,10 +63,10 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label>
-                                        <input type="radio" name="status" value="active" {{ $brand->status === 'active' ? 'checked':'' }} class="flat-red" checked> Active
+                                        <input type="radio" name="status" value="active" {{ $service->status === 'active' ? 'checked':'' }} class="flat-red" checked> Active
                                     </label>
                                     <label>
-                                        <input type="radio" name="status" value="inactive" {{ $brand->status === 'inactive' ? 'checked':'' }} class="flat-green"> Inactive
+                                        <input type="radio" name="status" value="inactive" {{ $service->status === 'inactive' ? 'checked':'' }} class="flat-green"> Inactive
                                     </label>
                                 </div>
                             </div>
@@ -64,7 +75,7 @@
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Update Brand</button>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Update</button>
                     </div>
                 </form>
             </div>

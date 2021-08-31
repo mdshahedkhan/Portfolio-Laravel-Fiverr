@@ -14,7 +14,7 @@ class AboutMeSeeder extends Seeder
      */
     public function run()
     {
-        $name = "waltercore";
+        $name = "Florian Lafay";
         AboutMe::create([
             'create_by'       => 1,
             'name'            => $name,

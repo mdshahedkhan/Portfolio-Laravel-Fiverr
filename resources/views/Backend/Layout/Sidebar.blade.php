@@ -53,9 +53,9 @@
                     <i class="fa fa-picture-o"></i> <span>Home Brand</span>
                 </a>
             </li>
-            <li class="{{ ActiveMenu('staff.home.brand.index') }}">
-                <a href="{{ route('staff.home.brand.index') }}" >
-                    <i class="fa fa-picture-o"></i> <span>Home Brand</span>
+            <li class="{{ ActiveMenu('staff.home.aboutme.index') }}">
+                <a href="{{ route('staff.home.aboutme.index') }}" >
+                    <i class="fa fa-address-card"></i> <span>About Me</span>
                 </a>
             </li>
             <li class="treeview ">
@@ -69,9 +69,14 @@
                     <li><a href="{{ route('staff.general.index') }}"><i class="fa fa-circle-o"></i> General</a></li>
                 </ul>
             </li>
-            <li class="btn-outline-danger">
+            <li class="btn-danger">
                 <a href="javascript:avoid()" onclick="event.preventDefault(); document.getElementById('LogoutForm').submit()">
                     <i class="fa fa-sign-out"></i> <span>Logout</span>
+                </a>
+            </li>
+            <li class="btn-success">
+                <a href="{{ route('index') }}" target="_blank">
+                    <i class="fa fa-globe"></i> <span>Go TO YOUR SITE</span>
                 </a>
             </li>
         </ul>
