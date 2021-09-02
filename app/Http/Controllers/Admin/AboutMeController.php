@@ -23,8 +23,19 @@ class AboutMeController extends Controller
 
     public function UpdateStore(Request $request, $id)
     {
-        $id = base64_decode($id);
+        $id      = base64_decode($id);
         $AboutMe = AboutMe::where('id', $id)->first();
+        if ($request->hasFile('avatar')) {
+            $TempImg = $request->file('avatar');
+            if ($TempImg->getMimeType() === 'image/jpeg' || $TempImg->getMimeType() === 'image/png') {
+                if (file_exists(public_path('Upload/AboutMe/' . $AboutMe->avatar))) {
+                    unlink(public_path('Upload/AboutMe' . $AboutMe->avatar));
+                }
+                $Avatar          = date('Ymdhis') . uniqid() . '.' . $TempImg->getClientOriginalExtension();
+                $AboutMe->avatar = $AboutMe;
+                Image::make($TempImg)->resize(330, 330)->save(public_path('Upload/AboutMe/' . $Avatar));
+            }
+        }
         return $AboutMe;
     }
 }

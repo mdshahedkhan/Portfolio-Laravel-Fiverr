@@ -127,6 +127,13 @@ class SiteController extends Controller
         return response()->json($response);
     }
 
+
+    public function AboutMe()
+    {
+        $AboutMe = AboutMe::where('id', '1')->first();
+        return view("Frontend.AboutMe", compact('AboutMe'));
+    }
+
     public function NotFound404()
     {
 
