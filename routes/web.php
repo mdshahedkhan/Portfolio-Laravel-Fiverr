@@ -25,6 +25,8 @@ Route::get('/contact-us', [SiteController::class, 'ContactUs'])->name('ContactUs
 Route::post('/contact', [SiteController::class, 'contact'])->name('contact');
 
 
+
+
 Route::prefix('/staff')->name('staff.')->middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     /*Frontend Route */
