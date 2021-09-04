@@ -37,7 +37,6 @@
                            </div>
                        </div>
                     </div>
-
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">

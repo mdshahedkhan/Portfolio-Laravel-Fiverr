@@ -19,10 +19,11 @@ use App\Http\Controllers\Admin\DashboardController;
 */
 
 Route::get('/', [SiteController::class, 'index'])->name('index');
+Route::get('/about', [SiteController::class, 'AboutMe'])->name('about');
 
-/*Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');*/
+Route::get('/contact-us', [SiteController::class, 'ContactUs'])->name('ContactUs');
+Route::post('/contact', [SiteController::class, 'contact'])->name('contact');
+
 
 Route::prefix('/staff')->name('staff.')->middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

@@ -33,7 +33,7 @@
                 <ul class="navbar-nav ms-md-auto gap-2">
                     <li class="nav-item"><a href="" class="nav-link">Curricula Vitae</a></li>
                     <li class="nav-item"><a href="" class="nav-link">Referenzen</a></li>
-                    <li class="nav-item"><a href="" class="nav-link">Kontakt</a></li>
+                    <li class="nav-item"><a href="{{ route('ContactUs') }}" class="nav-link">Kontakt</a></li>
                 </ul>
             </div>
         </div>

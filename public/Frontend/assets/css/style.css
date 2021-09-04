@@ -498,3 +498,42 @@ footer ul li {
     background-color: rgba(0, 206, 158, 1);
 }
 
+/** About Me Page CSS */
+#about-me {
+    padding: 8.5rem 0;
+}
+
+
+#about-me .container .row h2 {
+    font-weight: 700;
+    font-size: 3rem;
+}
+
+
+#about-me .container .row h4 {
+    font-weight: 700;
+    font-size: 2rem;
+    padding: 1rem 0;
+}
+
+
+#about-me .container .row h5{
+    padding: 1rem 0;
+}
+
+
+#about-me .container .row .btn-download {
+    color: #000000;
+}
+
+/** Contact Us Page CSS */
+#contact-us{
+    padding: 9rem 0;
+    text-align: center;
+}
+
+#contact-us label{
+    padding: .5rem;
+    font-size: 1.2rem;
+}
+

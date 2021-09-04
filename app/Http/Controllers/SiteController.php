@@ -130,12 +130,25 @@ class SiteController extends Controller
 
     public function AboutMe()
     {
-        $AboutMe = AboutMe::where('id', '1')->first();
-        return view("Frontend.AboutMe", compact('AboutMe'));
+        $AboutMe      = AboutMe::where('id', '1')->first();
+        $GeneralTITLE = GeneralSetting::where('id', 1)->first();
+        return view("Frontend.AboutMe", compact('AboutMe', 'GeneralTITLE'));
     }
 
-    public function NotFound404()
+    public function ContactUs()
     {
+        $GeneralTITLE = GeneralSetting::where('id', 1)->first();
+        return view('Frontend.contact', compact('GeneralTITLE'));
+    }
 
+    public function contact(Request $request)
+    {
+        $request->validate([
+            'name'    => 'required',
+            'email'   => 'required|email|min:10',
+            'subject' => 'required|min:6',
+            'message' => 'required|min:20'
+        ]);
+        return $request->all();
     }
 }
