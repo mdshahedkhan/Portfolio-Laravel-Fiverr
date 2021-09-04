@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\GeneralSetting;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -28,6 +29,7 @@ class ContactMail extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        $GeneralTITLE = GeneralSetting::where('id', 1)->first();
+        return $this->view('Frontend.contact', compact('GeneralTITLE'));
     }
 }

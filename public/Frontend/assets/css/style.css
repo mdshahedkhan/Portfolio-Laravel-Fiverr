@@ -528,7 +528,15 @@ footer ul li {
 
 /** Contact Us Page CSS */
 #contact-us{
-    padding: 9rem 0;
+    padding: 1.9rem 0;
+}
+
+#contact-us h2{
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+.name-or-email{
     text-align: center;
 }
 

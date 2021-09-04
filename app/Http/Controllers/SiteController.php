@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactMail;
 use App\Models\AboutMe;
 use App\Models\Brand;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 use Image;
 use App\Models\User;
 use App\Models\Service;
@@ -11,6 +14,7 @@ use Illuminate\Http\Request;
 use App\Models\GeneralSetting;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use League\Flysystem\Config;
 use Symfony\Component\HttpFoundation\Response;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
@@ -149,6 +153,12 @@ class SiteController extends Controller
             'subject' => 'required|min:6',
             'message' => 'required|min:20'
         ]);
-        return $request->all();
+        try {
+            Mail::to($request->email)->send(new ContactMail($request->all()));
+            SetMessage('success', 'Yah! your email has been successfully send.');
+        } catch (\Exception $exception) {
+            return $exception->getMessage();
+        }
+        return redirect()->back();
     }
 }
