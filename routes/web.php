@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\Admin\BrandController;
@@ -17,6 +18,21 @@ use App\Http\Controllers\Admin\DashboardController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+Route::get('/cleareverything', function () {
+    $clearcache = Artisan::call('cache:clear');
+    echo "Cache cleared<br>";
+
+    $clearview = Artisan::call('view:clear');
+    echo "View cleared<br>";
+
+    $clearconfig = Artisan::call('config:cache');
+    echo "Config cleared<br>";
+    $configClear = Artisan::call('cache:clear');
+    $Optimize = Artisan::call('optimize');
+    echo "Config<br>";
+});
 
 Route::get('/', [SiteController::class, 'index'])->name('index');
 Route::get('/about', [SiteController::class, 'AboutMe'])->name('about');

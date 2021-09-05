@@ -15,6 +15,7 @@
     <link rel="shortcut icon" href="{{ asset('Upload/General/'.$GeneralTITLE->logo) }}" type="image/x-icon">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
     <link rel="stylesheet" href="{{ asset('Frontend/assets/css/Responsive.css') }}">
+    <link rel="stylesheet" href="{{ asset('Frontend/Pack/toastr.min.css') }}">
 </head>
 <body>
     <div class="visible-topScroll">
@@ -32,7 +33,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-md-auto gap-2">
                     <li class="nav-item"><a href="" class="nav-link">Curricula Vitae</a></li>
-                    <li class="nav-item"><a href="" class="nav-link">Referenzen</a></li>
+                    <li class="nav-item"><a href="{{ route('about') }}" class="nav-link">Referenzen</a></li>
                     <li class="nav-item"><a href="{{ route('ContactUs') }}" class="nav-link">Kontakt</a></li>
                 </ul>
             </div>
@@ -62,8 +63,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <script src="{{ asset('Frontend/Pack/toastr.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('Frontend/vendor/slick/slick.min.js') }}"></script>
     <script src="{{ asset('Frontend/assets/js/script.js') }}"></script>
+    @yield('JS')
 
 </body>
 </html>

@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Mail\ContactMail;
 use App\Models\AboutMe;
 use App\Models\Brand;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str;
 use Image;
 use App\Models\User;
 use App\Models\Service;
@@ -14,7 +14,6 @@ use Illuminate\Http\Request;
 use App\Models\GeneralSetting;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use League\Flysystem\Config;
 use Symfony\Component\HttpFoundation\Response;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
@@ -148,17 +147,29 @@ class SiteController extends Controller
     public function contact(Request $request)
     {
         $request->validate([
-            'name'    => 'required',
-            'email'   => 'required|email|min:10',
-            'subject' => 'required|min:6',
-            'message' => 'required|min:20'
+            'name'         => 'required',
+            'email'        => 'required|email|min:10',
+            'subject'      => 'required|min:6',
+            'message'      => 'required|min:20',
+            'phone_number' => 'required'
         ]);
+        $response['status'] = Response::HTTP_OK;
+        $response['KeyIndex'] = $request->all();
         try {
+            \App\Models\ContactMail::create([
+                'name'         => $request->name,
+                'email'        => $request->email,
+                'subject'      => $request->subject,
+                'message'      => $request->message,
+                'phone_number' => $request->phone_number
+            ]);
             Mail::to($request->email)->send(new ContactMail($request->all()));
-            SetMessage('success', 'Yah! your email has been successfully send.');
+            $response['message'] = 'Yah! your email has been successfully send.';
+            //SetMessage('success', 'Yah! your email has been successfully send.');
         } catch (\Exception $exception) {
-            return $exception->getMessage();
+            $response['status']  = Response::HTTP_BAD_REQUEST;
+            $response["message"] = "Please Contact Your Developer.";
         }
-        return redirect()->back();
+        return response()->json($response)->setStatusCode(Response::HTTP_OK);
     }
 }

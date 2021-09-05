@@ -536,12 +536,11 @@ footer ul li {
     font-weight: 700;
 }
 
-.name-or-email{
-    text-align: center;
-}
-
-#contact-us label{
+#contact-us label {
     padding: .5rem;
     font-size: 1.2rem;
 }
 
+.send_message {
+    font-size: 18px;
+}

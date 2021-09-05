@@ -15,6 +15,12 @@ class CreateContactMailsTable extends Migration
     {
         Schema::create('contact_mails', function (Blueprint $table) {
             $table->id();
+            $table->string('name', 50);
+            $table->string('email');
+            $table->string('subject', 50);
+            $table->text('message');
+            $table->integer('phone_number');
+            $table->enum('read_as', ['read', 'unread'])->default('unread');
             $table->timestamps();
         });
     }

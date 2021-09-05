@@ -1,4 +1,5 @@
 <?php
+$AppName = \App\Models\GeneralSetting::where('id', 1)->first();
 
 return [
 
@@ -85,7 +86,7 @@ return [
 
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'name'    => $AppName->title,
     ],
 
     /*

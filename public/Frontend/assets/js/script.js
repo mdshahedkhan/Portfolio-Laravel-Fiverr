@@ -58,3 +58,49 @@ $(function () {
         }
     });
 });
+
+$('.send_message').click(function (event) {
+    event.preventDefault();
+    const SubmitMessage = $('#SubmitMessage');
+    $.ajax({
+        url: SubmitMessage.attr('action'),
+        method: "POST",
+        beforeSend: () => {
+            ErrorRemove()
+            $(this).html('Sending.... <i class="fa fa-spin fa-spinner"></i>');
+        },
+        complete: () => {
+            $(this).html('Send Message <i class="fas fa-paper-plane"></i>');
+        },
+        data: SubmitMessage.serialize(),
+        success: function (result) {
+            SubmitMessage[0].reset();
+            toastr.success(result.message);
+            ErrorRemove();
+        },
+        error: function (errors) {
+            ErrorRemove()
+            ErrorShow(errors.responseJSON.errors);
+        }
+    });
+});
+
+function ErrorShow(errors) {
+    $.each(errors, function (index, value) {
+        $('#error_' + index).text(value);
+        $('.error_' + index).addClass('is-invalid');
+    });
+}
+
+function ErrorRemove() {
+    $('#error_name').text('');
+    $('.error_name').removeClass('is-invalid');
+    $('#error_email').text('');
+    $('.error_email').removeClass('is-invalid');
+    $('#error_subject').text('');
+    $('.error_subject').removeClass('is-invalid');
+    $('#error_phone_number').text('');
+    $('.error_phone_number').removeClass('is-invalid');
+    $('#error_message').text('');
+    $('.error_message').removeClass('is-invalid');
+}
