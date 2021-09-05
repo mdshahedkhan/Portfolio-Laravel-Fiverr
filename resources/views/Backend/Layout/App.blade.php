@@ -57,26 +57,28 @@
                     <ul class="nav navbar-nav">
                         <!-- Messages: style can be found in dropdown.less-->
                         <li class="dropdown messages-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-envelope-o"></i>
-                                <span class="label label-success">4</span>
+                                <span class="label label-success">{{ $unReadMail->count() }}</span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li class="header">You have 4 messages</li>
+                                <li class="header">You have {{ $ContactMail->count() }} messages</li>
                                 <li>
                                     <!-- inner menu: contains the actual data -->
                                     <ul class="menu">
-                                        <li><!-- start message -->
-                                            <a href="#">
-                                                <div class="pull-left">
-                                                    <img src="{{ asset('Upload/Profile/'.Auth::user()->image) }}" class="img-circle" alt="User Image">
-                                                </div>
-                                                <h4>Support Team<small><i class="fa fa-clock-o"></i> 5 mins</small>
-                                                </h4>
-                                                <p>Why not buy a new awesome theme?</p>
-                                            </a>
-                                        </li>
-                                        <!-- end message -->
+                                        @foreach($ContactMail as $mail)
+                                            <li><!-- start message -->
+                                                <a href="" class="active">
+                                                    <div class="pull-left">
+                                                        <img src="{{ asset('Upload/Profile/'.Auth::user()->image) }}" class="img-circle" alt="User Image">
+                                                    </div>
+                                                    <h4>{{ $mail->name }}<small><i class="fa fa-clock-o"></i> {{ $mail->created_at->diffForHumans() }}</small>
+                                                    </h4>
+                                                    <p>{{ $mail->subject }}</p>
+                                                </a>
+                                            </li>
+                                            <!-- end message -->
+                                        @endforeach
                                     </ul>
                                 </li>
                                 <li class="footer"><a href="">See All Messages</a></li>

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SiteController;
+use App\Http\Controllers\Admin\MailController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\AboutMeController;
 use App\Http\Controllers\Admin\ServiceController;
@@ -70,8 +71,12 @@ Route::prefix('/staff')->name('staff.')->middleware('auth')->group(function () {
             Route::post('/destroy/{id}', [BrandController::class, 'destroy'])->name('destroy');
         });
     });
+
+    Route::prefix('/mail')->name('mail')->group(function () {
+        Route::get('/', [MailController::class, 'index'])->name('index');
+    });
     // General Setting Route
-    Route::prefix('/general')->name('general.')->group(function (){
+    Route::prefix('/general')->name('general.')->group(function () {
         Route::get('/', [SiteController::class, 'Setting'])->name('index');
         Route::patch('/user-update', [SiteController::class, 'userInfoUpdate'])->name('userInfoUpdate');
         Route::post('/update', [SiteController::class, 'UpdateGeneralSetting'])->name('UpdateGeneralSetting');
