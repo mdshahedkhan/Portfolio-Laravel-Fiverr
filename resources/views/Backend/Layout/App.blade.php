@@ -59,6 +59,10 @@
                         <li class="dropdown messages-menu">
                             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-envelope-o"></i>
+                                @php
+                                    $unReadMail = \App\Models\ContactMail::where('read_as', 'unread')->get();
+                                    $ContactMail = \App\Models\ContactMail::latest()->get();
+                                @endphp
                                 <span class="label label-success">{{ $unReadMail->count() }}</span>
                             </a>
                             <ul class="dropdown-menu">
@@ -81,7 +85,7 @@
                                         @endforeach
                                     </ul>
                                 </li>
-                                <li class="footer"><a href="">See All Messages</a></li>
+                                <li class="footer"><a href="{{ route('staff.mail.index') }}">See All Messages</a></li>
                             </ul>
                         </li>
                         <!-- Notifications: style can be found in dropdown.less -->
@@ -102,7 +106,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="footer"><a href="#">View all</a></li>
+                                <li class="footer"><a href="">View all</a></li>
                             </ul>
                         </li>
                         <!-- Tasks: style can be found in dropdown.less -->

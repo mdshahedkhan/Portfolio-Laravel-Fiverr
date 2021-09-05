@@ -74,8 +74,12 @@ $('.send_message').click(function (event) {
         },
         data: SubmitMessage.serialize(),
         success: function (result) {
-            SubmitMessage[0].reset();
-            toastr.success(result.message);
+            if (result.status){
+                SubmitMessage[0].reset();
+                toastr.success(result.message);
+            }else {
+                toastr.error(result.message);
+            }
             ErrorRemove();
         },
         error: function (errors) {

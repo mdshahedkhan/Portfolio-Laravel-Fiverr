@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\ContactMail;
-use App\Models\AboutMe;
-use App\Models\Brand;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Mail;
 use Image;
 use App\Models\User;
+use App\Models\Brand;
+use App\Models\AboutMe;
 use App\Models\Service;
+use App\Mail\ContactMail;
 use Illuminate\Http\Request;
 use App\Models\GeneralSetting;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;
@@ -91,6 +90,11 @@ class SiteController extends Controller
         //return redirect()->action([AuthenticatedSessionController::class, 'destroy'])->with('message', $response['message']);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+
     public function UpdateGeneralSetting(Request $request)
     {
         $request->validate([
@@ -130,6 +134,9 @@ class SiteController extends Controller
         return response()->json($response);
     }
 
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
 
     public function AboutMe()
     {
@@ -138,11 +145,20 @@ class SiteController extends Controller
         return view("Frontend.AboutMe", compact('AboutMe', 'GeneralTITLE'));
     }
 
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+
     public function ContactUs()
     {
         $GeneralTITLE = GeneralSetting::where('id', 1)->first();
         return view('Frontend.contact', compact('GeneralTITLE'));
     }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse|object
+     */
 
     public function contact(Request $request)
     {
@@ -153,7 +169,7 @@ class SiteController extends Controller
             'message'      => 'required|min:20',
             'phone_number' => 'required'
         ]);
-        $response['status'] = Response::HTTP_OK;
+        $response['status']   = Response::HTTP_OK;
         $response['KeyIndex'] = $request->all();
         try {
             \App\Models\ContactMail::create([

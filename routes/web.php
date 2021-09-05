@@ -72,8 +72,9 @@ Route::prefix('/staff')->name('staff.')->middleware('auth')->group(function () {
         });
     });
 
-    Route::prefix('/mail')->name('mail')->group(function () {
+    Route::prefix('/mail')->name('mail.')->group(function () {
         Route::get('/', [MailController::class, 'index'])->name('index');
+        Route::get('/read/{id}', [MailController::class, 'ReadEmail'])->name('read');
     });
     // General Setting Route
     Route::prefix('/general')->name('general.')->group(function () {
