@@ -18,8 +18,7 @@ class MailController extends Controller
     public function ReadEmail($id)
     {
         $id          = base64_decode($id);
-        $ContactMail = ContactMail::where('id', $id)->get();
-        $unReadMail  = ContactMail::where('read_as', 'unread')->get();
-        return view('Backend.mail.read', compact('unReadMail', 'ContactMail'));
+        $ContactMail = ContactMail::where('id', $id)->first();
+        return view('Backend.mail.read', compact( 'ContactMail'));
     }
 }
