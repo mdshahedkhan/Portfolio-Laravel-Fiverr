@@ -69,7 +69,7 @@
                                     <ul class="menu">
                                         @foreach($ContactMail as $mail)
                                             <li><!-- start message -->
-                                                <a href="" class="active">
+                                                <a href="{{ route('staff.mail.read', base64_encode($mail->id)) }}" class="active">
                                                     <div class="pull-left">
                                                         <img src="{{ asset('Upload/Profile/'.Auth::user()->image) }}" class="img-circle" alt="User Image">
                                                     </div>

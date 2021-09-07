@@ -26,10 +26,12 @@
                             <ul class="nav nav-pills nav-stacked">
                                 <li><a href="{{ route('staff.mail.index') }}">
                                         <i class="fa fa-inbox"></i>
-                                        Inbox<span class="label label-primary pull-right">12</span>
+                                        @php
+                                        $AllMails = \App\Models\ContactMail::all();
+                                        @endphp
+                                        Inbox<span class="label label-primary pull-right">{{ $AllMails->count() }}</span>
                                     </a>
                                 </li>
-                                <li><a href="#"><i class="fa fa-envelope-o"></i> Sent</a></li>
                                 <li><a href="#"><i class="fa fa-file-text-o"></i> Drafts</a></li>
                                 <li><a href="#"><i class="fa fa-filter"></i> Junk <span class="label label-warning pull-right">65</span></a></li>
                                 <li><a href="#"><i class="fa fa-trash-o"></i> Trash</a></li>
@@ -52,7 +54,7 @@
                         <!-- /.box-header -->
                         <div class="box-body no-padding">
                             <div class="mailbox-read-info">
-                                <h3>Message Subject Is Placed Here</h3>
+                                <h3><b>Subject:</b> {{ $ContactMail->subject }}</h3>
                                 <h5>From: {{ $ContactMail->email }}
                                     <span class="mailbox-read-time pull-right">{{ date("d-M-Y   : h:i:s", strtotime($ContactMail->created_at)) }}</span></h5>
                                 <h5>Phone: {{ $ContactMail->phone_number }}</h5>

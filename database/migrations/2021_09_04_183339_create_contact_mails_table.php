@@ -20,6 +20,8 @@ class CreateContactMailsTable extends Migration
             $table->string('subject', 50);
             $table->text('message');
             $table->integer('phone_number');
+            $table->enum('status', ['drafts', 'trash', 'inbox'])->default('inbox');
+            $table->softDeletes();
             $table->enum('read_as', ['read', 'unread'])->default('unread');
             $table->timestamps();
         });

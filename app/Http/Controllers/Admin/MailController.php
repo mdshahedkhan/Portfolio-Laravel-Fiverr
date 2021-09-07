@@ -19,6 +19,8 @@ class MailController extends Controller
     {
         $id          = base64_decode($id);
         $ContactMail = ContactMail::where('id', $id)->first();
+        $ContactMail->read_as = 'read';
+        $ContactMail->save();
         return view('Backend.mail.read', compact( 'ContactMail'));
     }
 }

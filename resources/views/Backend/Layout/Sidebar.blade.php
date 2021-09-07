@@ -58,6 +58,11 @@
                     <i class="fa fa-address-card"></i> <span>About Me</span>
                 </a>
             </li>
+            <li class="{{ ActiveMenu('staff.mail.index') }}">
+                <a href="{{ route('staff.mail.index') }}" >
+                    <i class="fa fa-envelope"></i> <span>Mail Box</span>
+                </a>
+            </li>
             <li class="treeview ">
                 <a href="javascript:;">
                     <i class="fa fa-cog"></i> <span>General Setting</span>
